@@ -1,0 +1,12 @@
+.bandeau-presentation {
+    background: url("/assets/images/bandeau.jpg") no-repeat center center;
+    width: 100%;
+    color: white;
+    background-size: cover;
+}
+
+.bandeau-presentation_headline {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.33;
+}

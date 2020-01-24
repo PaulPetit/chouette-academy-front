@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { MainComponent } from './main/main.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginPageComponent } from './_components/login-page/login-page.component';
+import { MainComponent } from './_components/main/main.component';
+
+import { SignUpPageComponent } from './_components/sign-up-page/sign-up-page.component';
+import { HomePageComponent } from './_components/home-page/home-page.component';
 
 
 @NgModule({
@@ -14,11 +16,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     LoginPageComponent,
     MainComponent,
-    DashboardComponent
+    SignUpPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [],
