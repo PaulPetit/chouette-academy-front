@@ -5,6 +5,7 @@ import { MainComponent } from './_components/main/main.component';
 
 import { SignUpPageComponent } from './_components/sign-up-page/sign-up-page.component';
 import { HomePageComponent } from './_components/home-page/home-page.component';
+import { CourseDetailsComponent } from './_components/course-details/course-details.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,16 @@ const routes: Routes = [
         path: '',
         component: HomePageComponent,
         pathMatch: 'full'
+      }
+  ]},
+  {path: "course", component: MainComponent,
+    children: [
+      {
+        path: '', redirectTo: '/', pathMatch:"full"
+      },
+      {
+        path: ":course-slug",
+        component: CourseDetailsComponent
       }
   ]}
 ];

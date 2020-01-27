@@ -26,8 +26,12 @@
 
             </ul>
             <form class="form-inline ml-5 my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Recherche">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
             </form>
             <div class="ml-auto">
                 <a routerLink="sign-up">
@@ -48,3 +52,22 @@
     <router-outlet></router-outlet>
 
 </main>
+
+<footer>
+    <hr>
+    <div class="container " style="padding-top: 1em;padding-bottom: 1em;">
+
+        <div class="row align-items-center mx-0">
+            <a routerLink="/">
+                <img class="nav-logo" src="assets/images/logo-inline-transparent.png" alt="logo">
+            </a>
+
+            <span class="ml-3">&copy; 2020</span>
+
+            <span class="ml-auto love">Fait avec &#10084;&#65039; par <a href="https://www.linkedin.com/in/rogez/" target="_blank">Fredy ROGEZ</a> et <a href="https://www.linkedin.com/in/paul-petit/"  target="_blank">Paul PETIT</a> </span>
+
+        </div>
+    </div>
+    <hr>
+
+</footer>

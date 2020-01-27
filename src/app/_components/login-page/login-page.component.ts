@@ -8,9 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
 
-  private submitted: boolean = false;
+  public submitted: boolean = false;
 
-  private loginForm: FormGroup;
+  public loginForm: FormGroup;
   
 
   constructor(private fb: FormBuilder) { }

@@ -9,6 +9,8 @@ import { MainComponent } from './_components/main/main.component';
 
 import { SignUpPageComponent } from './_components/sign-up-page/sign-up-page.component';
 import { HomePageComponent } from './_components/home-page/home-page.component';
+import { CourseCardComponent } from './_components/course-card/course-card.component';
+import { CourseDetailsComponent } from './_components/course-details/course-details.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { HomePageComponent } from './_components/home-page/home-page.component';
     LoginPageComponent,
     MainComponent,
     SignUpPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    CourseCardComponent,
+    CourseDetailsComponent
   ],
   imports: [
     BrowserModule,
