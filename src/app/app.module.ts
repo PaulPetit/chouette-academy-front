@@ -12,6 +12,8 @@ import { HomePageComponent } from './_components/home-page/home-page.component';
 import { CourseCardComponent } from './_components/course-card/course-card.component';
 import { CourseDetailsComponent } from './_components/course-details/course-details.component';
 
+import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { CourseDetailsComponent } from './_components/course-details/course-deta
     SignUpPageComponent,
     HomePageComponent,
     CourseCardComponent,
-    CourseDetailsComponent
+    CourseDetailsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

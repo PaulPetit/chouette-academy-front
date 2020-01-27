@@ -34,12 +34,24 @@
                 </div>
             </form>
             <div class="ml-auto">
-                <a routerLink="sign-up">
-                    <button class="btn btn-outline-success mr-3" type="submit">S'inscrire</button>
-                </a>
-                <a routerLink="login">
-                    <button class="btn btn-outline-success " type="submit">Se connecter</button>
-                </a>
+
+                <ng-container *ngIf="!authService.isAuthenticated()">
+                    <a routerLink="/sign-up">
+                        <button class="btn btn-outline-success mr-3" type="submit">S'inscrire</button>
+                    </a>
+                    <a routerLink="/login">
+                        <button class="btn btn-outline-success " type="submit">Se connecter</button>
+                    </a>
+                </ng-container>
+                <ng-container *ngIf="authService.isAuthenticated()">
+                    <a routerLink="/account">
+                        <button class="btn btn-outline-success mr-3" type="submit">Mon compte</button>
+                    </a>
+
+                    <button (click)="logout()" class="btn btn-outline-success mr-3" type="submit">Se déconnecter</button>
+
+                </ng-container>
+
             </div>
 
 
@@ -53,7 +65,7 @@
 
 </main>
 
-<footer>
+<footer id="footer">
     <hr>
     <div class="container " style="padding-top: 1em;padding-bottom: 1em;">
 

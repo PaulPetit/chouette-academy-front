@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -9,11 +11,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginPageComponent implements OnInit {
 
   public submitted: boolean = false;
+  public invalidCredentialsError : boolean = false;
 
   public loginForm: FormGroup;
-  
 
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder, private autenticationService: AuthenticationService ,private router: Router) { }
 
   ngOnInit() {
 
@@ -23,23 +26,22 @@ export class LoginPageComponent implements OnInit {
         Validators.email,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
       ]],
-      password: ['',[
+      password: ['', [
         Validators.required,
         Validators.minLength(8)
       ]]
     });
 
-    
 
   }
 
 
 
-  get login(){
+  get login() {
     return this.loginForm.get('login');
   }
 
-  get password(){
+  get password() {
     return this.loginForm.get('password');
   }
 
@@ -48,5 +50,29 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+
+    this.autenticationService.login(this.login.value, this.password.value).subscribe((value) =>{
+
+      console.log("auth " + value);
+      
+
+        if(value === false){
+          this.submitted = false;
+          this.invalidCredentialsError = true;
+          this.loginForm.reset();
+        }
+        else{
+          console.log("redirect to /");
+            this.router.navigate(['/']);
+        }
+
+    });
+
+  }
+
+  onFocus(){
+    console.log("onFocus");
+    
+    if(this.invalidCredentialsError) this.invalidCredentialsError = false;
   }
 }
