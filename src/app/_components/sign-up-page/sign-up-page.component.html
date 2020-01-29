@@ -13,6 +13,11 @@
             <div style='color:#ff7355' *ngIf="login.invalid && login.touched">
                 Veuillez entrer un email valide : example@domain.com
             </div>
+            <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
+            <input type="text" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur" formControlName="username">
+            <div style='color:#ff7355' *ngIf="username.invalid && username.touched">
+                Le nom d'utiliateur doit être compris entre 2 et 100 caractères
+            </div>
 
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { Router } from '@angular/router';
+import { MessagesService } from 'src/app/_services/messages.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,12 +12,12 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
 
   public submitted: boolean = false;
-  public invalidCredentialsError : boolean = false;
+  public invalidCredentialsError: boolean = false;
 
   public loginForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private autenticationService: AuthenticationService ,private router: Router) { }
+  constructor(private fb: FormBuilder, private autenticationService: AuthenticationService, private router: Router, private messageService: MessagesService) { }
 
   ngOnInit() {
 
@@ -51,28 +52,29 @@ export class LoginPageComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    this.autenticationService.login(this.login.value, this.password.value).subscribe((value) =>{
+    this.autenticationService.login(this.login.value, this.password.value).subscribe((value) => {
 
       console.log("auth " + value);
-      
 
-        if(value === false){
-          this.submitted = false;
-          this.invalidCredentialsError = true;
-          this.loginForm.reset();
-        }
-        else{
-          console.log("redirect to /");
-            this.router.navigate(['/']);
-        }
+
+      if (value === false) {
+        this.submitted = false;
+        this.invalidCredentialsError = true;
+        this.loginForm.reset();
+      }
+      else {
+        console.log("redirect to /");
+        this.messageService.addSuccessMessage("Connexion", "Connexion réussie");
+        this.router.navigate(['/']);
+      }
 
     });
 
   }
 
-  onFocus(){
+  onFocus() {
     console.log("onFocus");
-    
-    if(this.invalidCredentialsError) this.invalidCredentialsError = false;
+
+    if (this.invalidCredentialsError) this.invalidCredentialsError = false;
   }
 }

@@ -13,6 +13,9 @@ import { CourseCardComponent } from './_components/course-card/course-card.compo
 import { CourseDetailsComponent } from './_components/course-details/course-details.component';
 
 import { PageNotFoundComponent } from './_components/page-not-found/page-not-found.component';
+import { ToastGroupComponent } from './_components/toast-group/toast-group.component';
+import { ToastComponent } from './_components/toast/toast.component';
+
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
     HomePageComponent,
     CourseCardComponent,
     CourseDetailsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ToastGroupComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

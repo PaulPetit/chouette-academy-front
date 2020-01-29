@@ -1,0 +1,13 @@
+<!-- <div *ngIf="messages.length > 0" class="position-absolute w-100 d-flex flex-column p-4 toast-group">
+    <ng-container *ngFor="let message of messages">
+    <app-toast title="{{message.title}}" content="{{message.content}}"  ></app-toast>
+    </ng-container>
+</div> -->
+
+<div *ngIf="messages.length > 0" aria-live="polite" class="toast-group" aria-atomic="true" style="position: relative;">
+    <div style="position: absolute; top: 2rem; right: 2rem;">
+        <ng-container *ngFor="let message of messages">
+            <app-toast title="{{message.title}}" content="{{message.content}} " type="{{message.type}}"></app-toast>
+        </ng-container>
+    </div>
+</div>

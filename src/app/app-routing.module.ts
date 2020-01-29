@@ -11,7 +11,7 @@ import { PageNotFoundComponent } from './_components/page-not-found/page-not-fou
 
 
 const routes: Routes = [
-  
+
   {
     path: '', component: MainComponent,
     children: [
@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: "**", component: MainComponent,
     children: [
-      {path:'', component: PageNotFoundComponent}
+      { path: '', component: PageNotFoundComponent }
     ]
   }
 ];

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessagesService } from 'src/app/_services/messages.service';
+import { MessageType } from 'src/app/message';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private messageService:MessagesService) { }
 
   ngOnInit() {
   }
+
 
 }
