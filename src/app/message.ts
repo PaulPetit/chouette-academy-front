@@ -1,12 +1,12 @@
-export class Message{
-    title : String;
-    type : MessageType;
-    content : String;
+export class Message {
+  title: String;
+  type: MessageType;
+  content: String;
 }
 
 
 export enum MessageType {
-    Info,
-    Error,
-    Success
+  Info,
+  Error,
+  Success
 }

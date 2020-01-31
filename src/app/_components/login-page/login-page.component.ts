@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
-import { Router } from '@angular/router';
-import { MessagesService } from 'src/app/_services/messages.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from 'src/app/_services/authentication.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MessagesService} from 'src/app/_services/messages.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,21 +11,27 @@ import { MessagesService } from 'src/app/_services/messages.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  public submitted: boolean = false;
-  public invalidCredentialsError: boolean = false;
+  public submitted = false;
+  public invalidCredentialsError = false;
 
   public loginForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private autenticationService: AuthenticationService, private router: Router, private messageService: MessagesService) { }
+  constructor(
+    private fb: FormBuilder,
+    private autenticationService: AuthenticationService,
+    private router: Router,
+    private messageService: MessagesService,
+    private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
 
     this.loginForm = this.fb.group({
       login: ['', [
-        Validators.required,
+        Validators.required/*,
         Validators.email,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')*/
       ]],
       password: ['', [
         Validators.required,
@@ -37,7 +43,6 @@ export class LoginPageComponent implements OnInit {
   }
 
 
-
   get login() {
     return this.loginForm.get('login');
   }
@@ -47,25 +52,26 @@ export class LoginPageComponent implements OnInit {
   }
 
 
-
-
   onSubmit() {
     this.submitted = true;
 
     this.autenticationService.login(this.login.value, this.password.value).subscribe((value) => {
 
-      console.log("auth " + value);
+      console.log('auth ' + value);
 
 
       if (value === false) {
         this.submitted = false;
         this.invalidCredentialsError = true;
         this.loginForm.reset();
-      }
-      else {
-        console.log("redirect to /");
-        this.messageService.addSuccessMessage("Connexion", "Connexion réussie");
-        this.router.navigate(['/']);
+      } else {
+        // console.log('redirect to /');
+        this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
+        this.route.queryParams.subscribe(params => {
+          const redirect = params.redirectUrl || '/';
+          this.router.navigate([redirect]);
+        });
+
       }
 
     });
@@ -73,8 +79,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   onFocus() {
-    console.log("onFocus");
+    console.log('onFocus');
 
-    if (this.invalidCredentialsError) this.invalidCredentialsError = false;
+    if (this.invalidCredentialsError) {
+      this.invalidCredentialsError = false;
+    }
   }
 }

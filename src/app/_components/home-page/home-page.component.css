@@ -1,21 +1,21 @@
 .bandeau-presentation {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/bandeau.jpg") no-repeat center center;
-    width: 100%;
-    color: white;
-    background-size: cover;
-    text-shadow: 0 2px 4px rgba(41, 48, 59, .55);
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/assets/images/bandeau.jpg") no-repeat center center;
+  width: 100%;
+  color: white;
+  background-size: cover;
+  text-shadow: 0 2px 4px rgba(41, 48, 59, .55);
 }
 
 .bandeau-presentation_headline {
-    font-size: 50px;
-    font-weight: 600;
-    line-height: 1.33;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 1.33;
 }
 
 .bandeau-presentation_sub-headline {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 .bandeau-presentation_text {
-    font-size: 18px;
+  font-size: 18px;
 }

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { MessagesService } from './_services/messages.service';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,7 @@ import { MessagesService } from './_services/messages.service';
 })
 export class AppComponent {
 
-  constructor(){
+  constructor() {
 
   }
 

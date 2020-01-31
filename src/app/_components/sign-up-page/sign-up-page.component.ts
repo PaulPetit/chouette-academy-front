@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -12,7 +12,8 @@ export class SignUpPageComponent implements OnInit {
 
   public signUpForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
 
@@ -28,7 +29,7 @@ export class SignUpPageComponent implements OnInit {
         Validators.minLength(2),
         Validators.maxLength(100)
       ]],
-      
+
       passwords: this.fb.group({
         password: ['', [
           Validators.required,
@@ -38,18 +39,19 @@ export class SignUpPageComponent implements OnInit {
           Validators.required,
           Validators.minLength(8)
         ]],
-      }, { validator: this.passwordConfirming }),
+      }, {validator: this.passwordConfirming}),
 
     });
 
-    
+
   }
 
   passwordConfirming(c: AbstractControl): { invalid: boolean } {
     if (c.get('password').value !== c.get('confirm_password').value) {
-      return { invalid: true };
+      return {invalid: true};
     }
   }
+
   get login() {
     return this.signUpForm.get('login');
   }
@@ -59,13 +61,12 @@ export class SignUpPageComponent implements OnInit {
   }
 
   get password() {
-    return this.signUpForm.get(['passwords','password']);
+    return this.signUpForm.get(['passwords', 'password']);
   }
 
 
-
   get passwordConfirm() {
-    return this.signUpForm.get(['passwords','confirm_password']);
+    return this.signUpForm.get(['passwords', 'confirm_password']);
   }
 
   onSubmit() {

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MessageType } from 'src/app/message';
+import {Component, Input, OnInit} from '@angular/core';
+import {MessageType} from 'src/app/message';
 
 @Component({
   selector: 'app-toast',
@@ -8,11 +8,12 @@ import { MessageType } from 'src/app/message';
 })
 export class ToastComponent implements OnInit {
 
-  @Input() title: string = "Toast";
-  @Input() content: string = "Contenu par défaut";
+  @Input() title: string = 'Toast';
+  @Input() content: string = 'Contenu par défaut';
   @Input() type: MessageType = MessageType.Info;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -21,13 +22,13 @@ export class ToastComponent implements OnInit {
   get messageType() {
     switch (+this.type) { // Sans le + on passe toujours dans la case default, bug de TypeScript ?
       case MessageType.Error:
-        return "toast-error"
+        return 'toast-error';
       case MessageType.Info:
-        return "toast-info"
+        return 'toast-info';
       case MessageType.Success:
-        return "toast-success"
+        return 'toast-success';
       default:
-        return "";
+        return '';
     }
   }
 

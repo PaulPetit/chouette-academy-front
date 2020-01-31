@@ -1,14 +1,14 @@
 .nav-logo {
-    max-height: 60px;
+  max-height: 60px;
 }
 
-footer>hr {
-    margin: 0;
+footer > hr {
+  margin: 0;
 }
 
 .love a {
-    font-weight: 600;
-    color: #666;
-    text-decoration: none;
-    border: 0;
+  font-weight: 600;
+  color: #666;
+  text-decoration: none;
+  border: 0;
 }

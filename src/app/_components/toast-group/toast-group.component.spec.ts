@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ToastGroupComponent } from './toast-group.component';
+import {ToastGroupComponent} from './toast-group.component';
 
 describe('MessageComponent', () => {
   let component: ToastGroupComponent;
@@ -8,9 +8,9 @@ describe('MessageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToastGroupComponent ]
+      declarations: [ToastGroupComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

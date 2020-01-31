@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Message, MessageType } from '../message';
-import { Router, NavigationStart } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Message, MessageType} from '../message';
+import {Router} from '@angular/router';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,6 @@ import { Observable, of } from 'rxjs';
 export class MessagesService {
 
   private messages: Array<Message> = [];
-
 
 
   constructor(private router: Router) {
@@ -21,21 +20,20 @@ export class MessagesService {
   }
 
 
-
   public addMessage(messageTitle: String, messageContent: String, messageType: MessageType = MessageType.Info) {
-    this.messages.push({ content: messageContent, type: messageType, title: messageTitle });
+    this.messages.push({content: messageContent, type: messageType, title: messageTitle});
   }
 
-  public addErrorMessage(messageTitle: String, messageContent: String){
-    this.addMessage(messageTitle, messageContent, MessageType.Error)
+  public addErrorMessage(messageTitle: String, messageContent: String) {
+    this.addMessage(messageTitle, messageContent, MessageType.Error);
   }
 
-  public addInfoMessage(messageTitle: String, messageContent: String){
-    this.addMessage(messageTitle, messageContent, MessageType.Info)
+  public addInfoMessage(messageTitle: String, messageContent: String) {
+    this.addMessage(messageTitle, messageContent, MessageType.Info);
   }
 
-  public addSuccessMessage(messageTitle: String, messageContent: String){
-    this.addMessage(messageTitle, messageContent, MessageType.Success)
+  public addSuccessMessage(messageTitle: String, messageContent: String) {
+    this.addMessage(messageTitle, messageContent, MessageType.Success);
   }
 
 

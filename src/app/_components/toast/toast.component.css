@@ -1,16 +1,16 @@
-.toast-error{
-    background-color: rgba(220,53,69, .85);
+.toast-error {
+  background-color: rgba(220, 53, 69, .85);
 }
 
-.toast-success{
-    background-color: rgba(40,167,69,.85);
+.toast-success {
+  background-color: rgba(40, 167, 69, .85);
 }
 
 
-.toast-error > .toast-header{
-    background-color: rgba(220,53,69,.85);
+.toast-error > .toast-header {
+  background-color: rgba(220, 53, 69, .85);
 }
 
-.toast-success > .toast-header{
-    background-color: rgba(40,167,69,.85);
+.toast-success > .toast-header {
+  background-color: rgba(40, 167, 69, .85);
 }

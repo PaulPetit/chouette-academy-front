@@ -1,0 +1,14 @@
+video {
+  max-width: 100%;
+}
+
+.bandeau{
+  background-color: #29303B;
+  color: white;
+}
+
+.apprendre{
+  background-color: #E9ECEF;
+  border-radius: .3rem;
+  padding: 1.5rem;
+}

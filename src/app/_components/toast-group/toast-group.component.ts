@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MessagesService } from 'src/app/_services/messages.service';
-import { Router, NavigationStart } from '@angular/router';
-import { Message } from 'src/app/message';
+import {Component, OnInit} from '@angular/core';
+import {MessagesService} from 'src/app/_services/messages.service';
+import {NavigationStart, Router} from '@angular/router';
+import {Message} from 'src/app/message';
 
 @Component({
   selector: 'app-toast-group',
@@ -10,7 +10,7 @@ import { Message } from 'src/app/message';
 })
 export class ToastGroupComponent implements OnInit {
 
-  messages : Message[];
+  messages: Message[];
 
   constructor(private messageService: MessagesService, private router: Router) {
     this.router.events.subscribe(event => {
@@ -27,17 +27,19 @@ export class ToastGroupComponent implements OnInit {
   }
 
   showToasts() {
-    console.log("Show Toasts");
-    
-    this.messageService.getMessages().subscribe((messages)=>{
+    console.log('Show Toasts');
+
+    this.messageService.getMessages().subscribe((messages) => {
       console.log(messages);
-      
+
       this.messages = messages;
-      
-      setTimeout(function(){ (<any>$(".toast")).toast("show"); }, 500);
-      
+
+      setTimeout(function() {
+        (<any> $('.toast')).toast('show');
+      }, 500);
+
     });
- 
+
   }
 
 }
