@@ -17,9 +17,12 @@ export class MainComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.messageService.addSuccessMessage('Déconnexion', 'Déconnexion réussie');
-    this.router.navigate(['/']);
+    this.authService.logout()
+      .subscribe(value => {
+        this.messageService.addSuccessMessage('Déconnexion', 'Déconnexion réussie');
+        this.router.navigate(['/']);
+      });
+
   }
 
 }

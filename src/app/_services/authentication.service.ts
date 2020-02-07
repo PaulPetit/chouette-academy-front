@@ -1,13 +1,15 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {delay} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {ApiService} from './api.service';
+import {ApiEnpoints} from '../_class/apiEnpoints';
+import {ApiHttpMethod} from '../_enum/api-http-method.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor() {
+  constructor(private apiService: ApiService) {
   }
 
 
@@ -15,11 +17,12 @@ export class AuthenticationService {
     // console.log("isAuthenticated " + localStorage.getItem("logged"));
     // console.log(localStorage.getItem("logged") === "true");
 
-    return localStorage.getItem('logged') === 'true';
+    return localStorage.getItem('token') !== null;
   }
 
-  login(email: string, password: string): Observable<boolean> {
 
+  login(email: string, password: string): Observable<any> {
+    /*
     // faux login
     // console.error(email, password);
 
@@ -32,10 +35,23 @@ export class AuthenticationService {
       return of(false).pipe(delay(1000)); // délai de 1s pour simuler l'appel à l'api;
     }
 
+     */
+    return this.apiService.invoke(ApiEnpoints.LOGIN, ApiHttpMethod.POST, {login: 'ppetit', password: 'tutu'}, null);
+
   }
 
   logout() {
-    localStorage.removeItem('logged');
+    return this.apiService.invoke(ApiEnpoints.LOGOUT, ApiHttpMethod.POST, null, null)
   }
 
+
+  register(email: any, username: any, password: any) {
+    const payload = {
+      'email': email,
+      'userName': username,
+      'password': password
+    };
+
+    return this.apiService.invoke(ApiEnpoints.REGISTER, ApiHttpMethod.POST, payload, null);
+  }
 }

@@ -56,8 +56,8 @@ export class LoginPageComponent implements OnInit {
     this.submitted = true;
 
     this.autenticationService.login(this.login.value, this.password.value).subscribe((value) => {
-
-      console.log('auth ' + value);
+      console.log(value);
+      /*console.log('auth ' + value);
 
 
       if (value === false) {
@@ -72,7 +72,7 @@ export class LoginPageComponent implements OnInit {
           this.router.navigate([redirect]);
         });
 
-      }
+      }*/
 
     });
 

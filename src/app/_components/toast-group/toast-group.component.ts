@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagesService} from 'src/app/_services/messages.service';
 import {NavigationStart, Router} from '@angular/router';
-import {Message} from 'src/app/message';
+import {MessageClass} from 'src/app/_class/message.class';
 
 @Component({
   selector: 'app-toast-group',
@@ -10,7 +10,7 @@ import {Message} from 'src/app/message';
 })
 export class ToastGroupComponent implements OnInit {
 
-  messages: Message[];
+  messages: MessageClass[];
 
   constructor(private messageService: MessagesService, private router: Router) {
     this.router.events.subscribe(event => {

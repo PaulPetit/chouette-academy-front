@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MessageType} from 'src/app/message';
+import {MessageType} from '../../_enum/message-type.enum';
 
 @Component({
   selector: 'app-toast',

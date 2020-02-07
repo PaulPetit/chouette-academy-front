@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../../_services/authentication.service';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -8,11 +9,11 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 })
 export class SignUpPageComponent implements OnInit {
 
-  public submitted: boolean = false;
+  public submitted = false;
 
   public signUpForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
@@ -71,6 +72,15 @@ export class SignUpPageComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    this.authenticationService.register(this.login.value, this.username.value, this.password.value)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }
