@@ -6,6 +6,8 @@ import {TokenService} from './token.service';
 import {finalize} from 'rxjs/operators';
 import {PendingRequestClass} from '../_class/pending-request.class';
 import {ApiHttpMethod} from '../_enum/api-http-method.enum';
+import {Router} from '@angular/router';
+import {MessagesService} from './messages.service';
 
 
 @Injectable({
@@ -15,7 +17,7 @@ export class ApiService {
   private requests$ = new Subject<any>();
   private queue: PendingRequestClass[] = [];
 
-  constructor(private httpClient: HttpClient, private tokenService: TokenService) {
+  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router, private messageService: MessagesService) {
     this.requests$.subscribe(request => this.execute(request));
   }
 
@@ -27,7 +29,22 @@ export class ApiService {
 
   private execute(requestData: PendingRequestClass) {
 
+    // Si on demmande une page où l'authentification est necessaire,
+    // On vérifie si on est authentifié
+    // si pas authentifié, on redirige vers la page de login avec un message
+    // Ne pas oublier de vider la liste des requettes en attente
+
     const token = this.getToken();
+
+    if (token === null) {
+      if (requestData.url.includes('private')) {
+        // pas de droit
+        // on redirige
+        this.messageService.addErrorMessage('Erreur', 'Vous devez être connecté pour continuer');
+        this.router.navigate(['login']);
+        return;
+      }
+    }
 
 
     if (requestData.url.includes('logout')) {
@@ -117,7 +134,6 @@ export class ApiService {
     if (token !== null) {
       this.tokenService.setToken(token);
     }
-
   }
 
   private getToken() {

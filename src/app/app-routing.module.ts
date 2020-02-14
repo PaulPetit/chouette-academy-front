@@ -8,6 +8,7 @@ import {HomePageComponent} from './_components/home-page/home-page.component';
 import {CourseDetailsComponent} from './_components/course-details/course-details.component';
 import {LoggedInGuard} from './_guard/logged-in.guard';
 import {PageNotFoundComponent} from './_components/page-not-found/page-not-found.component';
+import {LivePageComponent} from './_components/live-page/live-page.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
       }
     ]
   },
-
+  {path: 'live/:channel', component: LivePageComponent},
   {path: 'login', component: LoginPageComponent, canActivate: [LoggedInGuard]},
   {path: 'sign-up', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
 

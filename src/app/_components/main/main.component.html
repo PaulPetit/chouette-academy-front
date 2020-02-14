@@ -1,65 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container container-larger">
-    <a routerLink="/">
-      <img class="nav-logo" src="assets/images/logo-inline-transparent.png" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-3">
-
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-list-ul"></i> Catégories
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-
-      </ul>
-      <form class="form-inline ml-5 my-2 my-lg-0">
-        <div class="input-group">
-          <input type="search" class="form-control" placeholder="Recherche">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
-          </div>
-        </div>
-      </form>
-      <div class="ml-auto">
-
-        <ng-container *ngIf="!authService.isAuthenticated()">
-          <a routerLink="/sign-up">
-            <button class="btn btn-outline-success mr-3" type="submit">S'inscrire</button>
-          </a>
-          <a routerLink="/login">
-            <button class="btn btn-outline-success " type="submit">Se connecter</button>
-          </a>
-        </ng-container>
-        <ng-container *ngIf="authService.isAuthenticated()">
-          <a routerLink="/account">
-            <button class="btn btn-outline-success mr-3" type="submit">Mon compte</button>
-          </a>
-
-          <button (click)="logout()" class="btn btn-outline-success mr-3" type="submit">Se déconnecter</button>
-
-        </ng-container>
-
-      </div>
-
-
-    </div>
-  </div>
-</nav>
+<app-narbar></app-narbar>
 
 <main role="main">
 
@@ -67,23 +6,4 @@
 
 </main>
 
-<footer id="footer">
-  <hr>
-  <div class="container container-larger" style="padding-top: 1em;padding-bottom: 1em;">
-
-    <div class="row align-items-center mx-0">
-      <a routerLink="/">
-        <img class="nav-logo" src="assets/images/logo-inline-transparent.png" alt="logo">
-      </a>
-
-      <span class="ml-3">&copy; 2020</span>
-
-      <span class="ml-auto love">Fait avec &#10084;&#65039; par <a href="https://www.linkedin.com/in/rogez/"
-                                                                   target="_blank">Fredy ROGEZ</a> et <a
-        href="https://www.linkedin.com/in/paul-petit/" target="_blank">Paul PETIT</a> </span>
-
-    </div>
-  </div>
-  <hr>
-
-</footer>
+<app-footer></app-footer>

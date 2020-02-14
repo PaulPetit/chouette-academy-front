@@ -17,6 +17,11 @@ import {PageNotFoundComponent} from './_components/page-not-found/page-not-found
 import {ToastGroupComponent} from './_components/toast-group/toast-group.component';
 import {ToastComponent} from './_components/toast/toast.component';
 import {TestComponent} from './_components/test/test/test.component';
+import { LivePageComponent } from './_components/live-page/live-page.component';
+import { NarbarComponent } from './_components/narbar/narbar.component';
+import { FooterComponent } from './_components/footer/footer.component';
+import { ChatComponent } from './_components/chat/chat.component';
+import { ChatMessageComponent } from './_components/chat-message/chat-message.component';
 
 
 @NgModule({
@@ -31,7 +36,12 @@ import {TestComponent} from './_components/test/test/test.component';
     PageNotFoundComponent,
     ToastGroupComponent,
     ToastComponent,
-    TestComponent
+    TestComponent,
+    LivePageComponent,
+    NarbarComponent,
+    FooterComponent,
+    ChatComponent,
+    ChatMessageComponent
   ],
   imports: [
     BrowserModule,

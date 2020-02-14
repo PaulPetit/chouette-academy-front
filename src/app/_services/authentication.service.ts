@@ -41,7 +41,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    return this.apiService.invoke(ApiEnpoints.LOGOUT, ApiHttpMethod.POST, null, null)
+    return this.apiService.invoke(ApiEnpoints.LOGOUT, ApiHttpMethod.POST, null, null);
   }
 
 
