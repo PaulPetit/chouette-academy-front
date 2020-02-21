@@ -36,7 +36,7 @@ export class AuthenticationService {
     }
 
      */
-    return this.apiService.invoke(ApiEnpoints.LOGIN, ApiHttpMethod.POST, {login: 'ppetit', password: 'tutu'}, null);
+    return this.apiService.invoke(ApiEnpoints.LOGIN, ApiHttpMethod.POST, {login: email, password: password}, null);
 
   }
 

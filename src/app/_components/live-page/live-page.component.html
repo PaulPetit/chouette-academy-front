@@ -1,13 +1,14 @@
 <app-narbar></app-narbar>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-9" style="background-color: aqua; height: 800px">
-            <video src="https://interactive-examples.mdn.mozilla.net/media/examples/flower.mp4" controls>
-                Votre navigateur ne gère pas l'élément <code>video</code>.
-            </video>
+    <div class="row mt-3">
+        <div class="col-9" style="height: 800px">
+            <!--<video  controls>
+                <source src="http://192.168.244.85:8080/hls/paul.m3u8" type="application/x-mpegURL">
+            </video>-->
+            <video id="video" controls></video>
         </div>
-        <div class="col-3" style="background-color: antiquewhite ; height: 800px">
+        <div class="col-3" style="height: 800px">
             <app-chat></app-chat>
         </div>
     </div>

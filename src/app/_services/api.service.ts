@@ -17,7 +17,8 @@ export class ApiService {
   private requests$ = new Subject<any>();
   private queue: PendingRequestClass[] = [];
 
-  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router, private messageService: MessagesService) {
+  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router,
+              private messageService: MessagesService) {
     this.requests$.subscribe(request => this.execute(request));
   }
 

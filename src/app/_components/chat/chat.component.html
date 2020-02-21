@@ -1,7 +1,7 @@
 <div style="height: 100%">
-    <div id="chat-messages-container" class="overflow-auto" style="height: 80%">
+    <div id="chat-messages-container" (scroll)="scrolled($event)" class="overflow-auto" style="height: 80%" #scrollFrame>
 
-        <app-chat-message #chatMessage *ngFor="let message of messages" username="{{message.username}}" message="{{message.message}}"></app-chat-message>
+        <app-chat-message #item *ngFor="let message of messages" username="{{message.username}}" message="{{message.message}}"></app-chat-message>
 
 
     </div>
