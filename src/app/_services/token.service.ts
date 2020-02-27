@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TokenService {
 
-  constructor() { }
+    constructor() {
+    }
 
-  getToken() {
-    return localStorage.getItem('token');
-  }
+    getToken() {
+        return localStorage.getItem('token');
+    }
 
-  setToken(token: string) {
-    localStorage.setItem('token', token);
-  }
+    setToken(token: string) {
+        localStorage.setItem('token', token);
+    }
 
-  removeToken() {
-    localStorage.removeItem('token');
-  }
+    removeToken() {
+        localStorage.removeItem('token');
+    }
 }

@@ -1,23 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../_services/authentication.service';
-import {Router, RouterStateSnapshot} from '@angular/router';
-import {state} from '@angular/animations';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-course-details',
-  templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.css']
+    selector: 'app-course-details',
+    templateUrl: './course-details.component.html',
+    styleUrls: ['./course-details.component.css']
 })
 export class CourseDetailsComponent implements OnInit {
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router) {
-  }
-  ngOnInit() {
-  }
+    constructor(
+        private authenticationService: AuthenticationService,
+        private router: Router) {
+    }
 
-  connect() {
-    this.router.navigate(['login'], {queryParams: {redirectUrl: this.router.routerState.snapshot.url}});
-  }
+    ngOnInit() {
+    }
+
+    connect() {
+        this.router.navigate(['login'], {queryParams: {redirectUrl: this.router.routerState.snapshot.url}});
+    }
 }

@@ -13,43 +13,43 @@ import {LivePageComponent} from './_components/live-page/live-page.component';
 
 const routes: Routes = [
 
-  {
-    path: '', component: MainComponent,
-    children: [
-      {
-        path: '',
-        component: HomePageComponent,
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
-    path: 'course', component: MainComponent,
-    children: [
-      {
-        path: '', redirectTo: '/', pathMatch: 'full'
-      },
-      {
-        path: ':course-slug',
-        component: CourseDetailsComponent
-      }
-    ]
-  },
-  {path: 'live/:channel', component: LivePageComponent},
-  {path: 'login', component: LoginPageComponent, canActivate: [LoggedInGuard]},
-  {path: 'sign-up', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
+    {
+        path: '', component: MainComponent,
+        children: [
+            {
+                path: '',
+                component: HomePageComponent,
+                pathMatch: 'full'
+            }
+        ]
+    },
+    {
+        path: 'course', component: MainComponent,
+        children: [
+            {
+                path: '', redirectTo: '/', pathMatch: 'full'
+            },
+            {
+                path: ':course-slug',
+                component: CourseDetailsComponent
+            }
+        ]
+    },
+    {path: 'live/:channel', component: LivePageComponent},
+    {path: 'login', component: LoginPageComponent, canActivate: [LoggedInGuard]},
+    {path: 'sign-up', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
 
-  {
-    path: '**', component: MainComponent,
-    children: [
-      {path: '', component: PageNotFoundComponent}
-    ]
-  }
+    {
+        path: '**', component: MainComponent,
+        children: [
+            {path: '', component: PageNotFoundComponent}
+        ]
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

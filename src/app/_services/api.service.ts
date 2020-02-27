@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {HttpClient, HttpHeaders, HttpResponseBase} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponseBase} from '@angular/common/http';
 import {log} from 'util';
 import {TokenService} from './token.service';
 import {finalize} from 'rxjs/operators';
@@ -11,135 +11,151 @@ import {MessagesService} from './messages.service';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ApiService {
 
-  private requests$ = new Subject<any>();
-  private queue: PendingRequestClass[] = [];
+    private requests$ = new Subject<any>();
+    private queue: PendingRequestClass[] = [];
 
-  constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router,
-              private messageService: MessagesService) {
-    this.requests$.subscribe(request => this.execute(request));
-  }
-
-  /** Call this method to add your http request to queue */
-  public invoke(url: string, method: ApiHttpMethod, params, options) {
-    return this.addRequestToQueue(url, method, params, options);
-  }
-
-  private execute(requestData: PendingRequestClass) {
-
-    // Si on demmande une page où l'authentification est necessaire,
-    // On vérifie si on est authentifié
-    // si pas authentifié, on redirige vers la page de login avec un message
-    // Ne pas oublier de vider la liste des requettes en attente
-
-    const token = this.getToken();
-
-    if (token === null) {
-      if (requestData.url.includes('private')) {
-        // pas de droit
-        // on redirige
-        this.messageService.addErrorMessage('Erreur', 'Vous devez être connecté pour continuer');
-        this.router.navigate(['login']);
-        return;
-      }
+    constructor(private httpClient: HttpClient, private tokenService: TokenService, private router: Router,
+                private messageService: MessagesService) {
+        this.requests$.subscribe(request => this.execute(request));
     }
 
-    if (requestData.url.includes('logout')) {
-      this.tokenService.removeToken();
+    /** Call this method to add your http request to queue */
+    private invoke(url: string, method: ApiHttpMethod, paramsGet, body, options): Subject<any> {
+        return this.addRequestToQueue(url, method, paramsGet, body, options);
     }
 
-    let headersToSet = new HttpHeaders();
+    private execute(requestData: PendingRequestClass) {
 
-    if (token !== null) {
-      headersToSet = headersToSet.set('Authorization', 'Bearer ' + token);
+        // Si on demmande une page où l'authentification est necessaire,
+        // On vérifie si on est authentifié
+        // si pas authentifié, on redirige vers la page de login avec un message
+        // Ne pas oublier de vider la liste des requettes en attente
+
+        const token = this.getToken();
+
+        /* if (token === null) {
+           if (requestData.url.includes('private')) {
+             // pas de droit
+             // on redirige
+             this.messageService.addErrorMessage('Erreur', 'Vous devez être connecté pour continuer');
+             this.router.navigate(['login']);
+             return;
+           }
+         }*/
+
+        if (requestData.url.includes('logout')) {
+            this.tokenService.removeToken();
+        }
+
+        let headersToSet = new HttpHeaders();
+
+        if (token !== null) {
+            headersToSet = headersToSet.set('Authorization', 'Bearer ' + token);
+        }
+
+        const httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams } = {
+            headers: headersToSet,
+            observe: 'response',
+            params: requestData.paramsGet
+        };
+
+
+        switch (requestData.method) {
+            case ApiHttpMethod.GET:
+                this.getMethod(requestData, httpOptions);
+                break;
+            case ApiHttpMethod.POST:
+                this.postMethod(requestData, httpOptions);
+                break;
+            default:
+                console.error('Method Not Implemented !');
+                break;
+        }
     }
 
-    const httpOptions = {
-      headers: headersToSet,
-      observe: 'response'
-    };
-
-
-    switch (requestData.method) {
-      case ApiHttpMethod.GET:
-        this.getMethod(requestData, httpOptions);
-        break;
-      case ApiHttpMethod.POST:
-        this.postMethod(requestData, httpOptions);
-        break;
-      default:
-        console.error('Method Not Implemented !');
-        break;
+    private postMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams }) {
+        const sub = requestData.subscription;
+        // @ts-ignore
+        this.httpClient.post(requestData.url, requestData.body, httpOptions)
+            .pipe(finalize(() => {
+                this.queue.shift();
+                this.startNextRequest();
+            }))
+            .subscribe(res => {
+                    sub.next(res);
+                    this.updateToken(res);
+                },
+                error => {
+                    sub.error(error);
+                    // log(error);
+                });
     }
-  }
 
-  private postMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string }) {
-    const sub = requestData.subscription;
-    // @ts-ignore
-    this.httpClient.post(requestData.url, requestData.params, httpOptions)
-      .pipe(finalize(() => {
-        this.queue.shift();
-        this.startNextRequest();
-      }))
-      .subscribe(res => {
-          sub.next(res);
-          this.updateToken(res);
-        },
-        error => {
-          sub.error(error);
-          // log(error);
-        });
-  }
-
-  private getMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string }) {
-    const sub = requestData.subscription;
-    // @ts-ignore
-    this.httpClient.get(requestData.url, httpOptions)
-      .pipe(finalize(() => {
-        this.queue.shift();
-        this.startNextRequest();
-      }))
-      .subscribe(res => {
-          sub.next(res);
-          this.updateToken(res);
-        },
-        error => {
-          sub.error(error);
-          // log(error);
-        });
-  }
-
-  private addRequestToQueue(url, method, params, options) {
-    const sub = new Subject<any>();
-    const request = new PendingRequestClass(url, method, params, options, sub);
-
-    this.queue.push(request);
-    if (this.queue.length === 1) {
-      this.startNextRequest();
+    private getMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams }) {
+        const sub = requestData.subscription;
+        // @ts-ignore
+        this.httpClient.get(requestData.url, httpOptions)
+            .pipe(finalize(() => {
+                this.queue.shift();
+                this.startNextRequest();
+            }))
+            .subscribe(res => {
+                    sub.next(res);
+                    this.updateToken(res);
+                },
+                error => {
+                    sub.error(error);
+                    // log(error);
+                });
     }
-    return sub;
-  }
 
-  private startNextRequest() {
-    // get next request, if any.
-    if (this.queue.length > 0) {
-      this.execute(this.queue[0]);
+    private addRequestToQueue(url, method, paramsGet, body, options): Subject<any> {
+        const sub = new Subject<any>();
+        const request = new PendingRequestClass(url, method, paramsGet, body, options, sub);
+
+        this.queue.push(request);
+        if (this.queue.length === 1) {
+            this.startNextRequest();
+        }
+        return sub;
     }
-  }
 
-  private updateToken(res: HttpResponseBase) {
-    log('écriture du nouveau token');
-    const token = res.headers.get('X-token');
-    if (token !== null) {
-      this.tokenService.setToken(token);
+    private startNextRequest() {
+        // get next request, if any.
+        if (this.queue.length > 0) {
+            this.execute(this.queue[0]);
+        }
     }
-  }
 
-  private getToken() {
-    log('lecture du token');
-    return this.tokenService.getToken();
-  }
+    private updateToken(res: HttpResponseBase) {
+        log('écriture du nouveau token');
+        const token = res.headers.get('X-token');
+        if (token !== null) {
+            this.tokenService.setToken(token);
+        }
+    }
+
+    private getToken() {
+        log('lecture du token');
+        return this.tokenService.getToken();
+    }
+
+    public makeGetRequest(url: string, paramsGet: object, options: object = null): Subject<any> {
+        return this.invoke(url, ApiHttpMethod.GET, paramsGet, null, options);
+    }
+    public makePostRequest(url: string, paramsGet: object, body: object, options: object = null): Subject<any> {
+        return this.invoke(url, ApiHttpMethod.POST, paramsGet, body, options);
+    }
+
+    public makePutRequest(url: string, paramsGet: object, body: object, options: object = null): Subject<any> {
+        return this.invoke(url, ApiHttpMethod.PUT, paramsGet, body, options);
+    }
+
+    public makeDeleteRequest(url: string, paramsGet: object, options: object = null): Subject<any> {
+        return this.invoke(url, ApiHttpMethod.DELETE, paramsGet, null, options);
+    }
 }

@@ -1,4 +1,6 @@
 export enum ApiHttpMethod {
     GET,
-    POST
+    POST,
+    PUT,
+    DELETE
 }

@@ -1,18 +1,26 @@
 <div style="height: 100%">
-    <div id="chat-messages-container" (scroll)="scrolled($event)" class="overflow-auto" style="height: 80%" #scrollFrame>
+    <div id="chat-messages-container" (scroll)="scrolled($event)" class="overflow-auto" style="height: 80%"
+         #scrollFrame>
 
-        <app-chat-message #item *ngFor="let message of messages" username="{{message.username}}" message="{{message.message}}"></app-chat-message>
-
+        <app-chat-message #item
+                          *ngFor="let message of messages"
+                          username="{{message.username}}"
+                          message="{{message.message}}">
+        </app-chat-message>
 
     </div>
 
     <div>
 
         <div class="form-group">
-            <textarea style="resize: none" class="form-control" id="exampleFormControlTextarea1" rows="1" placeholder="Envoyer un message"></textarea>
+            <textarea #textAreaChat style="resize: none" class="form-control" id="exampleFormControlTextarea1" rows="1"
+                      placeholder="Envoyer un message"></textarea>
         </div>
         <div class="d-flex">
-            <button type="button" class="btn btn-primary btn-sm ml-auto">Chat</button>
+            <button [disabled]="textAreaChat.value.length <= 0" (click)="sendMessage(textAreaChat.value)" type="button"
+                    class="btn btn-primary btn-sm ml-auto">
+                Chat
+            </button>
         </div>
     </div>
 

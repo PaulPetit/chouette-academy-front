@@ -193,7 +193,8 @@
                 <p class="lead">
                     <button *ngIf="authenticationService.isAuthenticated()" class="btn btn-primary btn-lg">S'inscrire
                     </button>
-                    <button (click)="connect()" *ngIf="!authenticationService.isAuthenticated()" class="btn btn-primary btn-lg">
+                    <button (click)="connect()" *ngIf="!authenticationService.isAuthenticated()"
+                            class="btn btn-primary btn-lg">
                         Connectez-vous pour vous inscrire
                     </button>
                 </p>

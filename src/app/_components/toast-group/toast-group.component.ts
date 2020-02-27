@@ -4,42 +4,42 @@ import {NavigationStart, Router} from '@angular/router';
 import {MessageClass} from 'src/app/_class/message.class';
 
 @Component({
-  selector: 'app-toast-group',
-  templateUrl: './toast-group.component.html',
-  styleUrls: ['./toast-group.component.css']
+    selector: 'app-toast-group',
+    templateUrl: './toast-group.component.html',
+    styleUrls: ['./toast-group.component.css']
 })
 export class ToastGroupComponent implements OnInit {
 
-  messages: MessageClass[];
+    messages: MessageClass[];
 
-  constructor(private messageService: MessagesService, private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.showToasts();
-      }
-    });
-  }
+    constructor(private messageService: MessagesService, private router: Router) {
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationStart) {
+                this.showToasts();
+            }
+        });
+    }
 
 
-  ngOnInit() {
-    //this.showToasts();
-    this.messages = [];
-  }
+    ngOnInit() {
+        //this.showToasts();
+        this.messages = [];
+    }
 
-  showToasts() {
-    console.log('Show Toasts');
+    showToasts() {
+        console.log('Show Toasts');
 
-    this.messageService.getMessages().subscribe((messages) => {
-      console.log(messages);
+        this.messageService.getMessages().subscribe((messages) => {
+            console.log(messages);
 
-      this.messages = messages;
+            this.messages = messages;
 
-      setTimeout(function() {
-        (<any> $('.toast')).toast('show');
-      }, 500);
+            setTimeout(function() {
+                (<any> $('.toast')).toast('show');
+            }, 500);
 
-    });
+        });
 
-  }
+    }
 
 }
