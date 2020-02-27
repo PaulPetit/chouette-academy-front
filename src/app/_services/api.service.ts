@@ -14,6 +14,7 @@ import {MessagesService} from './messages.service';
   providedIn: 'root'
 })
 export class ApiService {
+
   private requests$ = new Subject<any>();
   private queue: PendingRequestClass[] = [];
 
@@ -26,7 +27,6 @@ export class ApiService {
   public invoke(url: string, method: ApiHttpMethod, params, options) {
     return this.addRequestToQueue(url, method, params, options);
   }
-
 
   private execute(requestData: PendingRequestClass) {
 
@@ -47,15 +47,14 @@ export class ApiService {
       }
     }
 
-
     if (requestData.url.includes('logout')) {
       this.tokenService.removeToken();
     }
 
-    const headersToSet = new HttpHeaders();
+    let headersToSet = new HttpHeaders();
 
     if (token !== null) {
-      headersToSet.append('Authorization', 'Bearer ' + token);
+      headersToSet = headersToSet.set('Authorization', 'Bearer ' + token);
     }
 
     const httpOptions = {
@@ -78,6 +77,7 @@ export class ApiService {
   }
 
   private postMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string }) {
+    const sub = requestData.subscription;
     // @ts-ignore
     this.httpClient.post(requestData.url, requestData.params, httpOptions)
       .pipe(finalize(() => {
@@ -85,16 +85,17 @@ export class ApiService {
         this.startNextRequest();
       }))
       .subscribe(res => {
-          const sub = requestData.subscription;
-          sub.next(res.body);
+          sub.next(res);
           this.updateToken(res);
         },
         error => {
-          log(error);
+          sub.error(error);
+          // log(error);
         });
   }
 
   private getMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string }) {
+    const sub = requestData.subscription;
     // @ts-ignore
     this.httpClient.get(requestData.url, httpOptions)
       .pipe(finalize(() => {
@@ -102,12 +103,12 @@ export class ApiService {
         this.startNextRequest();
       }))
       .subscribe(res => {
-          const sub = requestData.subscription;
           sub.next(res);
           this.updateToken(res);
         },
         error => {
-          log(error);
+          sub.error(error);
+          // log(error);
         });
   }
 

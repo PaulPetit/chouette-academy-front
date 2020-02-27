@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from 'src/app/_services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessagesService} from 'src/app/_services/messages.service';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login-page',
@@ -55,9 +56,19 @@ export class LoginPageComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    this.autenticationService.login(this.login.value, this.password.value).subscribe((value) => {
+
+    this.autenticationService.login(this.login.value, this.password.value).subscribe((value: HttpResponse<any>) => {
       console.log(value);
+
+      this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
+      this.route.queryParams.subscribe(params => {
+        const redirect = params.redirectUrl || '/';
+        this.router.navigate([redirect]);
+      });
+
       /*console.log('auth ' + value);
+
+
 
 
       if (value === false) {
@@ -74,12 +85,19 @@ export class LoginPageComponent implements OnInit {
 
       }*/
 
+    }, (error: any) => {
+      console.log('dans erreur !!!!!');
+      console.log(error);
+      this.submitted = false;
+      this.invalidCredentialsError = true;
+      this.loginForm.reset();
+
     });
 
   }
 
   onFocus() {
-    console.log('onFocus');
+    // console.log('onFocus');
 
     if (this.invalidCredentialsError) {
       this.invalidCredentialsError = false;
