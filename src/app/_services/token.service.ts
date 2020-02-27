@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {log} from "util";
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +14,7 @@ export class TokenService {
     }
 
     setToken(token: string) {
+        log('écriture du nouveau token');
         localStorage.setItem('token', token);
     }
 

@@ -4,8 +4,8 @@
 
         <app-chat-message #item
                           *ngFor="let message of messages"
-                          username="{{message.username}}"
-                          message="{{message.message}}">
+                          username="{{message.user}}"
+                          message="{{message.content}}">
         </app-chat-message>
 
     </div>
@@ -17,7 +17,7 @@
                       placeholder="Envoyer un message"></textarea>
         </div>
         <div class="d-flex">
-            <button [disabled]="textAreaChat.value.length <= 0" (click)="sendMessage(textAreaChat.value)" type="button"
+            <button  (click)="sendMessage(textAreaChat.value)" type="button"
                     class="btn btn-primary btn-sm ml-auto">
                 Chat
             </button>

@@ -132,7 +132,7 @@ export class ApiService {
     }
 
     private updateToken(res: HttpResponseBase) {
-        log('écriture du nouveau token');
+
         const token = res.headers.get('X-token');
         if (token !== null) {
             this.tokenService.setToken(token);

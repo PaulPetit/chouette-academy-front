@@ -69,14 +69,14 @@ export class TestComponent implements OnInit {
             );
     }
 
-    testRequetteavectoken() {
+    /*testRequetteavectoken() {
         this.apiService.invoke('http://192.168.244.27:8080/private', ApiHttpMethod.GET, null, null, null)
             .subscribe(
                 response => {
                     console.log(response);
                 }
             );
-    }
+    }*/
 
     testTimestamp() {
         alert(Date.now());
