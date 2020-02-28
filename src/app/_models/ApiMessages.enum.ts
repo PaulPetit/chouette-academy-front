@@ -1,0 +1,5 @@
+export enum ApiMessages {
+    REGISTERED_OK,
+    EMAIL_ALREADY_EXISTS,
+    USER_NAME_ALREADY_EXISTS
+}
