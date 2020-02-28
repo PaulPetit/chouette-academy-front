@@ -18,7 +18,7 @@ import {ToastGroupComponent} from './_components/toast-group/toast-group.compone
 import {ToastComponent} from './_components/toast/toast.component';
 import {TestComponent} from './_components/test/test/test.component';
 import {LivePageComponent} from './_components/live-page/live-page.component';
-import {NarbarComponent} from './_components/narbar/narbar.component';
+import {NavbarComponent} from './_components/narbar/navbar.component';
 import {FooterComponent} from './_components/footer/footer.component';
 import {ChatComponent} from './_components/chat/chat.component';
 import {ChatMessageComponent} from './_components/chat-message/chat-message.component';
@@ -38,7 +38,7 @@ import {ChatMessageComponent} from './_components/chat-message/chat-message.comp
         ToastComponent,
         TestComponent,
         LivePageComponent,
-        NarbarComponent,
+        NavbarComponent,
         FooterComponent,
         ChatComponent,
         ChatMessageComponent

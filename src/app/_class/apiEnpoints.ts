@@ -12,4 +12,9 @@ export class ApiEnpoints {
     public static CHAT_GET = ApiEnpoints.BASE + '/chat/{chatID}/messages';
     public static CHAT_GET_SERVER_TIME = ApiEnpoints.BASE + '/time';
 
+
+    /* Catégories */
+    public static GET_CATEGORIES = ApiEnpoints.BASE + '/categories';
+
+
 }

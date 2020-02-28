@@ -90,7 +90,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private getTimestamp() {
-        //return Math.floor(Date.now() / 1000);
+        // return Math.floor(Date.now() / 1000);
         const now = new Date();
         return Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(),
             now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds()) / 1000) + this.deltaTime;
