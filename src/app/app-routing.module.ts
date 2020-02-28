@@ -37,7 +37,7 @@ const routes: Routes = [
     },
     {path: 'live/:channel', component: LivePageComponent},
     {path: 'login', component: LoginPageComponent, canActivate: [LoggedInGuard]},
-    {path: 'sign-up', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
+    {path: 'register', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
 
     {
         path: '**', component: MainComponent,

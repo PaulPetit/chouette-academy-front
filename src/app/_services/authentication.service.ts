@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {ApiService} from './api.service';
 import {ApiEnpoints} from '../_class/apiEnpoints';
 import {ApiHttpMethod} from '../_enum/api-http-method.enum';
+import {UserRegisterModel} from '../_models/userRegisterModel';
 
 @Injectable({
     providedIn: 'root'
@@ -46,13 +47,7 @@ export class AuthenticationService {
     }
 
 
-    register(email: any, username: any, password: any) {
-        const payload = {
-            'email': email,
-            'userName': username,
-            'password': password
-        };
-
-        return this.apiService.makePostRequest(ApiEnpoints.REGISTER, null, payload);
+    register(userRegisterModel: UserRegisterModel) {
+        return this.apiService.makePostRequest(ApiEnpoints.REGISTER, null, userRegisterModel);
     }
 }

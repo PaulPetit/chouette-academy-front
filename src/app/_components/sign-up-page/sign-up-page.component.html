@@ -9,16 +9,22 @@
             <h1 class="h3 mb-3 font-weight-normal">S'inscrire</h1>
 
             <label for="inputEmail" class="sr-only">Adresse email</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Adresse email" formControlName="login"
+            <input (focus)="resetErrors()" type="email" id="inputEmail" class="form-control" placeholder="Adresse email" formControlName="login"
                    autofocus>
             <div style='color:#ff7355' *ngIf="login.invalid && login.touched">
                 Veuillez entrer un email valide : example@domain.com
             </div>
+            <div style='color:#ff7355' *ngIf="emailAlreadyUsed">
+                C'est email est déjà utilisé
+            </div>
             <label for="inputUsername" class="sr-only">Nom d'utilisateur</label>
-            <input type="text" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur"
+            <input (focus)="resetErrors()" type="text" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur"
                    formControlName="username">
             <div style='color:#ff7355' *ngIf="username.invalid && username.touched">
                 Le nom d'utiliateur doit être compris entre 2 et 100 caractères
+            </div>
+            <div style='color:#ff7355' *ngIf="userNameAlreadyUsed">
+                Ce nom d'utilisateur est déjà utilisé
             </div>
 
 

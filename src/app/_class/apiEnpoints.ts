@@ -4,7 +4,7 @@ export class ApiEnpoints {
 
     public static LOGIN = ApiEnpoints.BASE + '/login';
     public static LOGOUT = ApiEnpoints.BASE + '/logout';
-    public static REGISTER = ApiEnpoints.BASE + '/logout';
+    public static REGISTER = ApiEnpoints.BASE + '/register';
 
     /* CHAT */
 

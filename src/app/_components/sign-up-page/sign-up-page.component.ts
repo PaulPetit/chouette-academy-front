@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../_services/authentication.service';
+import {UserRegisterModel} from '../../_models/userRegisterModel';
+import {Router} from '@angular/router';
+import {MessagesService} from '../../_services/messages.service';
+import {ApiMessages} from '../../_models/ApiMessages.enum';
 
 @Component({
     selector: 'app-sign-up-page',
@@ -12,8 +16,14 @@ export class SignUpPageComponent implements OnInit {
     public submitted = false;
 
     public signUpForm: FormGroup;
+    public emailAlreadyUsed = false;
+    public userNameAlreadyUsed = false;
 
-    constructor(private fb: FormBuilder, private authenticationService: AuthenticationService) {
+    constructor(private fb: FormBuilder,
+                private authenticationService: AuthenticationService,
+                private router: Router,
+                private messagesService: MessagesService
+    ) {
     }
 
     ngOnInit() {
@@ -72,10 +82,36 @@ export class SignUpPageComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        this.authenticationService.register(this.login.value, this.username.value, this.password.value)
+        const userRegisterModel: UserRegisterModel = {
+            email: this.login.value,
+            userName: this.username.value,
+            password: this.password.value
+        };
+
+        this.authenticationService.register(userRegisterModel)
             .subscribe(
                 response => {
-                    console.log(response);
+                    // console.log(response);
+                    // @ts-ignore
+                    const apiMessages: ApiMessages = ApiMessages[response.body.message];
+
+                    if (apiMessages === ApiMessages.REGISTERED_OK) {
+                        this.messagesService.addSuccessMessage('Register', 'Vous pouvez désormais vous connecter');
+                        this.router.navigate(['login']);
+                    } else {
+                        // Dans le cas d'une erreur
+                        if (apiMessages === ApiMessages.EMAIL_ALREADY_EXISTS) {
+                            this.submitted = false;
+                            this.emailAlreadyUsed = true;
+                        }
+                        if (apiMessages === ApiMessages.USER_NAME_ALREADY_EXISTS) {
+                            this.submitted = false;
+                            this.userNameAlreadyUsed = true;
+                        }
+
+                    }
+
+
                 },
                 error => {
                     console.log(error);
@@ -83,4 +119,8 @@ export class SignUpPageComponent implements OnInit {
             );
     }
 
+    resetErrors() {
+        this.emailAlreadyUsed = false;
+        this.userNameAlreadyUsed = false;
+    }
 }
