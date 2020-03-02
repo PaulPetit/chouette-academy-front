@@ -24,6 +24,7 @@ import {ChatComponent} from './_components/chat/chat.component';
 import {ChatMessageComponent} from './_components/chat-message/chat-message.component';
 
 
+
 @NgModule({
     declarations: [
         AppComponent,

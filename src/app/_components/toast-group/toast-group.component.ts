@@ -6,7 +6,7 @@ import {MessageClass} from 'src/app/_class/message.class';
 @Component({
     selector: 'app-toast-group',
     templateUrl: './toast-group.component.html',
-    styleUrls: ['./toast-group.component.css']
+    styleUrls: ['./toast-group.component.scss']
 })
 export class ToastGroupComponent implements OnInit {
 

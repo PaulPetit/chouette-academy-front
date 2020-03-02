@@ -147,6 +147,7 @@ export class ApiService {
     public makeGetRequest(url: string, paramsGet: object = null, options: object = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.GET, paramsGet, null, options);
     }
+
     public makePostRequest(url: string, paramsGet: object, body: object, options: object = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.POST, paramsGet, body, options);
     }

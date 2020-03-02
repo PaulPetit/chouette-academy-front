@@ -5,7 +5,7 @@ declare var Hls: any;
 @Component({
     selector: 'app-live-page',
     templateUrl: './live-page.component.html',
-    styleUrls: ['./live-page.component.css']
+    styleUrls: ['./live-page.component.scss']
 })
 export class LivePageComponent implements OnInit {
 
