@@ -21,7 +21,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <ng-container *ngFor="let category of categories">
-                            <a class="dropdown-item" href="#">{{category.name}}</a>
+                            <a class="dropdown-item" [routerLink]="['/category',  category.id ]">{{category.name}}</a>
                         </ng-container>
                         <!--<a class="dropdown-item" href="#">Action</a>
                         <a class="dropdown-item" href="#">Another action</a>
@@ -50,7 +50,7 @@
                     </a>
                 </ng-container>
                 <ng-container *ngIf="authService.isAuthenticated()">
-                    <a routerLink="/account">
+                    <a routerLink="/user">
                         <button class="btn btn-outline-success mr-3" type="submit">Mon compte</button>
                     </a>
 

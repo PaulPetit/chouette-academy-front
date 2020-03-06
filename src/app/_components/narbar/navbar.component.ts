@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         this.categoriesService.getAllCategories().subscribe(
             (value: HttpResponse<any>) => {
-                console.log(value);
+                // console.log(value);
                 this.categories = value.body.categories;
             }
         );
@@ -40,4 +40,7 @@ export class NavbarComponent implements OnInit {
     }
 
 
+    encodeURI(name: string) {
+        return encodeURI(name);
+    }
 }

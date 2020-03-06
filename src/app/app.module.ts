@@ -22,6 +22,9 @@ import {NavbarComponent} from './_components/narbar/navbar.component';
 import {FooterComponent} from './_components/footer/footer.component';
 import {ChatComponent} from './_components/chat/chat.component';
 import {ChatMessageComponent} from './_components/chat-message/chat-message.component';
+import { UserReviewComponent } from './_components/user-review/user-review.component';
+import { CategoriesPageComponent } from './_components/categories-page/categories-page.component';
+import { PrivateUserPageComponent } from './_components/private-user-page/private-user-page.component';
 
 
 
@@ -42,7 +45,10 @@ import {ChatMessageComponent} from './_components/chat-message/chat-message.comp
         NavbarComponent,
         FooterComponent,
         ChatComponent,
-        ChatMessageComponent
+        ChatMessageComponent,
+        UserReviewComponent,
+        CategoriesPageComponent,
+        PrivateUserPageComponent
     ],
     imports: [
         BrowserModule,

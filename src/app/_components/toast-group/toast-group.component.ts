@@ -22,15 +22,15 @@ export class ToastGroupComponent implements OnInit {
 
 
     ngOnInit() {
-        //this.showToasts();
+        // this.showToasts();
         this.messages = [];
     }
 
     showToasts() {
-        console.log('Show Toasts');
+        // console.log('Show Toasts');
 
         this.messageService.getMessages().subscribe((messages) => {
-            console.log(messages);
+            // console.log(messages);
 
             this.messages = messages;
 

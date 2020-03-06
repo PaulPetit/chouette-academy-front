@@ -1,7 +1,8 @@
 import {Deserializable} from './deserializable.model';
 
 
-export class CategoryModel implements Deserializable{
+export class CategoryModel implements Deserializable {
+    id: number;
     name: string;
     description: string;
     imageUrl?: string;

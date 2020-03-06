@@ -9,6 +9,9 @@ import {CourseDetailsComponent} from './_components/course-details/course-detail
 import {LoggedInGuard} from './_guard/logged-in.guard';
 import {PageNotFoundComponent} from './_components/page-not-found/page-not-found.component';
 import {LivePageComponent} from './_components/live-page/live-page.component';
+import {CategoriesPageComponent} from './_components/categories-page/categories-page.component';
+import {PrivateUserPageComponent} from './_components/private-user-page/private-user-page.component';
+import {AlreadyLoggedInGuard} from './_components/already-logged-in.guard';
 
 
 const routes: Routes = [
@@ -35,10 +38,23 @@ const routes: Routes = [
             }
         ]
     },
-    {path: 'live/:channel', component: LivePageComponent},
-    {path: 'login', component: LoginPageComponent, canActivate: [LoggedInGuard]},
-    {path: 'register', component: SignUpPageComponent, canActivate: [LoggedInGuard]},
+    {
+        path: 'category', component: MainComponent,
+        children: [
+            {
+                path: '', redirectTo: '/', pathMatch: 'full'
+            },
+            {
+                path: ':category-id',
+                component: CategoriesPageComponent
+            }
+        ]
+    },
 
+    {path: 'live/:channel', component: LivePageComponent, canActivate: [LoggedInGuard]},
+    {path: 'login', component: LoginPageComponent, canActivate: [AlreadyLoggedInGuard]},
+    {path: 'register', component: SignUpPageComponent, canActivate: [AlreadyLoggedInGuard]},
+    {path: 'user', component: PrivateUserPageComponent, canActivate: [LoggedInGuard]},
     {
         path: '**', component: MainComponent,
         children: [
