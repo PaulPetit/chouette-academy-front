@@ -56,9 +56,10 @@ export class LoginPageComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
-
         this.autenticationService.login(this.login.value, this.password.value).subscribe((value: HttpResponse<any>) => {
             console.log(value);
+
+            localStorage.setItem("userId", value.body.data.userId);
 
             this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
             this.route.queryParams.subscribe(params => {

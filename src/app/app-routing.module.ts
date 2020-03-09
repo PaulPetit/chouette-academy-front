@@ -12,6 +12,7 @@ import {LivePageComponent} from './_components/live-page/live-page.component';
 import {CategoriesPageComponent} from './_components/categories-page/categories-page.component';
 import {PrivateUserPageComponent} from './_components/private-user-page/private-user-page.component';
 import {AlreadyLoggedInGuard} from './_components/already-logged-in.guard';
+import {CourseEditPageComponent} from "./_compnents/course-edit-page/course-edit-page.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
     {path: 'login', component: LoginPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'register', component: SignUpPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'user', component: PrivateUserPageComponent, canActivate: [LoggedInGuard]},
+    {path: 'user/course/edit/:course-id', component: CourseEditPageComponent, canActivate: [LoggedInGuard]},
     {
         path: '**', component: MainComponent,
         children: [

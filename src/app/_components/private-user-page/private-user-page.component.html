@@ -1,29 +1,92 @@
 <app-navbar></app-navbar>
 
-<div class="container container-larger">
+<div class="container container-larger mt-3 mb-3">
 
     <div class="row">
         <div class="col-3">
             <div class="card">
                 <div class="card-header">
-                    Featured
+                    Menu
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="">Mes souscriptions</a></li>
-                    <li class="list-group-item"><a href="">Mes Cours</a></li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item">
+                        <a (click)="changeView(checkType.Subscriptions)">Mes souscriptions</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a (click)="changeView(checkType.Courses)">Mes Cours</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a (click)="changeView(checkType.Stream)">Mes informations de stream</a>
+                    </li>
                 </ul>
             </div>
         </div>
 
         <div class="col-9">
+            <ng-container *ngIf="selectedMenu == checkType.Subscriptions">
+                <h1>Mes souscriptions</h1>
+            </ng-container>
+            <ng-container *ngIf="selectedMenu == checkType.Courses">
+                <h1>Mes Cours</h1>
+                <button class="btn btn-info" (click)="showCourseCreationModal()">Créer un cours</button>
 
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Date prévue</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr *ngFor="let course of myCourses">
+                        <td scope="row">{{ course.title }}</td>
+                        <td>{{ course.status }}</td>
+                        <td>{{ course.timestampStreamPlanned }}</td>
+                        <td>
+                            <button class="btn btn-outline-info" (click)="showEdit(course.id)">Edit</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </ng-container>
+            <ng-container *ngIf="selectedMenu == checkType.Stream">
+                <h1>Mes informations de stream</h1>
+            </ng-container>
         </div>
 
 
     </div>
 
 
+</div>
+
+
+<div class="modal fade" id="courseCreationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Indiquez le nom du cours</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" [formGroup]="courseCreationForm">
+                <input class="form-control" type="text" formControlName="courseTitle">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary" (click)="submit()"
+                        [disabled]="courseCreationForm.invalid">Créer le cours
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

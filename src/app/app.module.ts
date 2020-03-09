@@ -25,6 +25,7 @@ import {ChatMessageComponent} from './_components/chat-message/chat-message.comp
 import { UserReviewComponent } from './_components/user-review/user-review.component';
 import { CategoriesPageComponent } from './_components/categories-page/categories-page.component';
 import { PrivateUserPageComponent } from './_components/private-user-page/private-user-page.component';
+import { CourseEditPageComponent } from './_compnents/course-edit-page/course-edit-page.component';
 
 
 
@@ -48,7 +49,8 @@ import { PrivateUserPageComponent } from './_components/private-user-page/privat
         ChatMessageComponent,
         UserReviewComponent,
         CategoriesPageComponent,
-        PrivateUserPageComponent
+        PrivateUserPageComponent,
+        CourseEditPageComponent
     ],
     imports: [
         BrowserModule,
