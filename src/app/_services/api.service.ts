@@ -71,6 +71,9 @@ export class ApiService {
             case ApiHttpMethod.POST:
                 this.postMethod(requestData, httpOptions);
                 break;
+            case ApiHttpMethod.PUT:
+                this.putMethod(requestData, httpOptions);
+                break;
             default:
                 console.error('Method Not Implemented !');
                 break;
@@ -81,6 +84,24 @@ export class ApiService {
         const sub = requestData.subscription;
         // @ts-ignore
         this.httpClient.post(requestData.url, requestData.body, httpOptions)
+            .pipe(finalize(() => {
+                this.queue.shift();
+                this.startNextRequest();
+            }))
+            .subscribe(res => {
+                    sub.next(res);
+                    this.updateToken(res);
+                },
+                error => {
+                    sub.error(error);
+                    // log(error);
+                });
+    }
+
+    private putMethod(requestData: PendingRequestClass, httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams }) {
+        const sub = requestData.subscription;
+        // @ts-ignore
+        this.httpClient.put(requestData.url, requestData.body, httpOptions)
             .pipe(finalize(() => {
                 this.queue.shift();
                 this.startNextRequest();

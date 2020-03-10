@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {CourseService} from "../../_services/course.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoriesService} from "../../_services/categories.service";
+import {ApiService} from "../../_services/api.service";
 
 @Component({
     selector: 'app-course-edit-page',
@@ -14,15 +15,18 @@ export class CourseEditPageComponent implements OnInit {
     courseId: number;
     public courseForm: FormGroup;
     public categories: any;
+    options: any = {format: 'DD/MM/YYYY'};
 
     constructor(
         private route: ActivatedRoute,
         private courseService: CourseService,
         private categoriesService: CategoriesService,
-        private fb: FormBuilder) {
+        private fb: FormBuilder
+    ) {
     }
 
     ngOnInit() {
+
         this.courseId = +this.route.snapshot.paramMap.get('course-id');
 
         this.courseForm = this.fb.group({
@@ -37,11 +41,15 @@ export class CourseEditPageComponent implements OnInit {
             ]],
             date: ['', [
                 Validators.required
+            ]],
+            hour: ['', [
+                Validators.required
+            ]],
+            minute: ['', [
+                Validators.required
             ]]
-
         });
 
-        this.loadCategories();
         this.loadData();
     }
 
@@ -57,7 +65,21 @@ export class CourseEditPageComponent implements OnInit {
         return this.courseForm.get('category');
     }
 
+    get date() {
+        return this.courseForm.get('date');
+    }
+
+    get hour() {
+        return this.courseForm.get('hour');
+    }
+
+    get minute() {
+        return this.courseForm.get('minute');
+    }
+
     private loadData() {
+
+        //this.initDAteDebug();
 
         this.categoriesService.getAllCategories()
             .subscribe(value => {
@@ -67,6 +89,19 @@ export class CourseEditPageComponent implements OnInit {
                     .subscribe(value => {
                         console.log(value);
                         const course = value.body;
+
+                        // remplir les dates
+                        const timestampPlanned = course.timestampStreamPlanned;
+                        const timeZoneOffset = new Date().getTimezoneOffset();
+                        const date = new Date(timestampPlanned * 1000);
+
+                        const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
+                        const m = date.getUTCMinutes() - timeZoneOffset % 60;
+                        const jour = date.toISOString().substring(0,10);
+
+                        this.date.setValue(jour);
+                        this.hour.setValue(h);
+                        this.minute.setValue(m);
 
                         this.title.setValue(course.title);
                         this.description.setValue(course.description);
@@ -81,10 +116,37 @@ export class CourseEditPageComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.courseForm.get('category'));
+        console.log(this.courseForm);
+        const date = new Date(this.date.value);
+        date.setHours(this.hour.value);
+        date.setMinutes(this.minute.value);
+
+        let timestamp = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+            date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+        timestamp = Math.floor(timestamp / 1000);
+
+        const course = {
+            id: this.courseId,
+            title: this.title.value,
+            description: this.description.value,
+            timestampStreamPlanned: timestamp,
+            categoryId: this.category.value
+        };
+
+        this.courseService.updateCourse(course)
+            .subscribe(value => {
+                console.log(value);
+            });
+
     }
 
-    private loadCategories() {
+    private initDAteDebug() {
+        const timestampPlanned = 1585645200;
+        const timeZoneOffset = new Date().getTimezoneOffset();
+        const date = new Date(timestampPlanned * 1000);
 
+        const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
+        const m = date.getUTCMinutes() - timeZoneOffset % 60;
+        const jour = date.toISOString().substring(0,10);
     }
 }

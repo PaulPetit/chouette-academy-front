@@ -21,4 +21,8 @@ export class CourseService {
     getCourse(courseId: number) {
         return this.apiService.makeGetRequest(ApiEnpoints.GET_COURSE + "/" + courseId);
     }
+
+    updateCourse(course) {
+        return this.apiService.makePutRequest(ApiEnpoints.UPDATE_COURSE, null, course);
+    }
 }

@@ -26,6 +26,7 @@ import { UserReviewComponent } from './_components/user-review/user-review.compo
 import { CategoriesPageComponent } from './_components/categories-page/categories-page.component';
 import { PrivateUserPageComponent } from './_components/private-user-page/private-user-page.component';
 import { CourseEditPageComponent } from './_compnents/course-edit-page/course-edit-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -57,7 +58,8 @@ import { CourseEditPageComponent } from './_compnents/course-edit-page/course-ed
         AppRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
