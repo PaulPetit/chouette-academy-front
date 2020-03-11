@@ -23,6 +23,14 @@ export class ApiEnpoints {
     public static GET_MY_COURSES = ApiEnpoints.BASE + '/courses/owned';
     public static GET_COURSE = ApiEnpoints.BASE + '/course';
     public static UPDATE_COURSE = ApiEnpoints.BASE + '/course/update';
+    public static SEND_COURSE_PICTURE = ApiEnpoints.BASE + '/course/picture';
+    public static GET_COURSES = ApiEnpoints.BASE + '/courses';
+    public static GET_UPCOMING_COURSES = ApiEnpoints.BASE + '/courses/upcoming';
 
+
+
+    /* User */
+    public static GET_CURRENT_USER_INFOS = ApiEnpoints.BASE + '/user/edit';
+    public static UPDATE_CURRENT_USER_INFOS = ApiEnpoints.BASE + '/user/update';
 }
 

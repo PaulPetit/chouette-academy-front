@@ -27,6 +27,7 @@ import { CategoriesPageComponent } from './_components/categories-page/categorie
 import { PrivateUserPageComponent } from './_components/private-user-page/private-user-page.component';
 import { CourseEditPageComponent } from './_compnents/course-edit-page/course-edit-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DateCAPipe } from './date-ca.pipe';
 
 
 
@@ -51,7 +52,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         UserReviewComponent,
         CategoriesPageComponent,
         PrivateUserPageComponent,
-        CourseEditPageComponent
+        CourseEditPageComponent,
+        DateCAPipe
     ],
     imports: [
         BrowserModule,

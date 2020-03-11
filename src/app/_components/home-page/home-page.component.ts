@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagesService} from 'src/app/_services/messages.service';
+import {CourseService} from "../../_services/course.service";
 
 @Component({
     selector: 'app-home-page',
@@ -8,11 +9,35 @@ import {MessagesService} from 'src/app/_services/messages.service';
 })
 export class HomePageComponent implements OnInit {
 
-    constructor(private messageService: MessagesService) {
+
+    upcomingCourses: Array<any>;
+
+    constructor(private messageService: MessagesService, private courseService: CourseService) {
     }
 
     ngOnInit() {
+
+        this.loadUpcomingCourses();
+
+
+
     }
 
 
+    private loadUpcomingCourses() {
+        this.courseService.getUpcommingCourses()
+            .subscribe(
+                value => {
+                     console.log(value);
+                    this.upcomingCourses = value.body.courses;
+                }
+            );
+
+        /*this.courseService.getAllCourses()
+            .subscribe(value => {
+                let courses: Array<any> = value.body.courses;
+                courses = courses.filter(value1 => value1.status == "PLANNED");
+                console.log(courses);
+            });*/
+    }
 }

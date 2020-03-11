@@ -15,6 +15,7 @@ export class CourseDetailsComponent implements OnInit {
     }
 
     ngOnInit() {
+
     }
 
     connect() {

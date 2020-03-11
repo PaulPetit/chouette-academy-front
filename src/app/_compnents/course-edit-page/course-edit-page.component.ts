@@ -16,6 +16,8 @@ export class CourseEditPageComponent implements OnInit {
     public courseForm: FormGroup;
     public categories: any;
     options: any = {format: 'DD/MM/YYYY'};
+    imageForm: FormGroup;
+    coursePicture: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -28,6 +30,14 @@ export class CourseEditPageComponent implements OnInit {
     ngOnInit() {
 
         this.courseId = +this.route.snapshot.paramMap.get('course-id');
+
+        this.imageForm = this.fb.group(
+            {
+                file: [null, [
+                    Validators.required
+                ]]
+            }
+        );
 
         this.courseForm = this.fb.group({
             title: ['', [
@@ -90,6 +100,8 @@ export class CourseEditPageComponent implements OnInit {
                         console.log(value);
                         const course = value.body;
 
+                        this.coursePicture = course.pictureUrl;
+
                         // remplir les dates
                         const timestampPlanned = course.timestampStreamPlanned;
                         const timeZoneOffset = new Date().getTimezoneOffset();
@@ -148,5 +160,21 @@ export class CourseEditPageComponent implements OnInit {
         const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
         const m = date.getUTCMinutes() - timeZoneOffset % 60;
         const jour = date.toISOString().substring(0,10);
+    }
+
+    onSubmitImage() {
+        console.log(this.imageForm);
+        this.courseService.sendImage(this.imageForm.get('file').value, this.courseId)
+            .subscribe(value => {
+                console.log('envoi image');
+                console.log(value);
+            });
+    }
+
+    uploadFile($event: Event) {
+        const file = ($event.target as HTMLInputElement).files[0];
+        this.imageForm.patchValue({
+            file: file
+        });
     }
 }

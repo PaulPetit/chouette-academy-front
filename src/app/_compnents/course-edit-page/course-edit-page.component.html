@@ -1,6 +1,20 @@
 <app-navbar></app-navbar>
 
 <div class="container">
+
+    <ng-container *ngIf="coursePicture">
+        <img style="width: 150px" src="{{ coursePicture }}" alt="Image de couverture">
+    </ng-container>
+
+    <form class="mt-3" [formGroup]="imageForm" (ngSubmit)="onSubmitImage()">
+        <div class="form-group">
+            <label for="courseImg">Image de couverture du cours</label>
+            <input (change)="uploadFile($event)" class="form-control" id="courseImg" type="file" formControlName="file">
+        </div>
+        <button [disabled]="imageForm.invalid" class="btn btn-primary" type="submit">Envoyer l'image</button>
+    </form>
+
+
     <form class="mt-3" [formGroup]="courseForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
@@ -30,7 +44,7 @@
 
         <div class="form-group">
             <label for="courseHour">Heure</label>
-            <select formControlName="hour" class="form-control" id="courseHour" >
+            <select formControlName="hour" class="form-control" id="courseHour">
                 <option value="0">00</option>
                 <option value="1">01</option>
                 <option value="2">02</option>
@@ -57,7 +71,7 @@
                 <option value="23">23</option>
             </select>
             <label for="courseMinute">Minutes</label>
-            <select formControlName="minute" class="form-control" id="courseMinute" >
+            <select formControlName="minute" class="form-control" id="courseMinute">
                 <option value="0">00</option>
                 <option value="15">15</option>
                 <option value="30">30</option>
@@ -78,8 +92,6 @@
         <button [disabled]="courseForm.invalid" class="btn btn-primary" type="submit">Valider</button>
     </form>
 </div>
-
-
 
 
 <app-footer></app-footer>
