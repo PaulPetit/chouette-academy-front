@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 this.chatService.getMessages(this.chatId, this.startTime, this.endTime).subscribe(messages => {
                     // limite à MAX_MESSAGES messages
-                    console.log(messages);
+                    //console.log(messages);
                     const toDisplay: any[] = messages.body.messages;
                     if (this.messages.length >= this.MAX_MESSAGES) {
                         this.messages.shift();

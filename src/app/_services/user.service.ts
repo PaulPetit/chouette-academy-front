@@ -17,4 +17,8 @@ export class UserService {
     updateCurrentUserInfos(userInfos: any) {
         return this.apiService.makePutRequest(ApiEnpoints.UPDATE_CURRENT_USER_INFOS, null, userInfos);
     }
+
+    getUserInfosById(id: number) {
+        return this.apiService.makeGetRequest(ApiEnpoints.GET_USER_PUBLIC_INFOS_BY_ID + '/' + id);
+    }
 }

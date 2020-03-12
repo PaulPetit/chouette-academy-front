@@ -34,7 +34,7 @@ const routes: Routes = [
                 path: '', redirectTo: '/', pathMatch: 'full'
             },
             {
-                path: ':course-slug',
+                path: ':course-id',
                 component: CourseDetailsComponent
             }
         ]
@@ -52,7 +52,7 @@ const routes: Routes = [
         ]
     },
 
-    {path: 'live/:channel', component: LivePageComponent, canActivate: [LoggedInGuard]},
+    {path: 'live/:course-id', component: LivePageComponent, canActivate: [LoggedInGuard]},
     {path: 'login', component: LoginPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'register', component: SignUpPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'user', component: PrivateUserPageComponent, canActivate: [LoggedInGuard]},

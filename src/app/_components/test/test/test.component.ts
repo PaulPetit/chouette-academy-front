@@ -79,6 +79,7 @@ export class TestComponent implements OnInit {
     }*/
 
     testTimestamp() {
-        alert(Date.now());
+        console.log(new Date());
+        console.log(new Date(1583409600*1000));
     }
 }

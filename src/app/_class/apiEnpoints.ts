@@ -32,5 +32,6 @@ export class ApiEnpoints {
     /* User */
     public static GET_CURRENT_USER_INFOS = ApiEnpoints.BASE + '/user/edit';
     public static UPDATE_CURRENT_USER_INFOS = ApiEnpoints.BASE + '/user/update';
+    public static GET_USER_PUBLIC_INFOS_BY_ID = ApiEnpoints.BASE + '/user/public';
 }
 
