@@ -148,18 +148,13 @@
             <div class="row mx-0 mb-5 apprendre align-items-center">
 
                 <div class="col-4 d-flex">
-                    <img src="https://www.fillmurray.com/120/120" class="rounded-circle mx-auto my-auto"
+                    <img style="width: 120px; height: 120px" src="{{ course?.instructor?.pictureUrl || 'https://www.fillmurray.com/120/120'}}" class="rounded-circle mx-auto my-auto"
                          alt="formateur">
 
                 </div>
                 <div class="col-8">
                     <h3>{{course?.instructor?.fullName}}</h3>
-                    <!--<p><b>La description du formateur</b> Lorem ipsum, dolor sit amet consectetur adipisicing elit. In
-                        dolores cumque temporibus beatae magnam provident, eveniet quasi ipsum minima quaerat ab rerum
-                        perspiciatis hic saepe laboriosam culpa veritatis obcaecati nihil.
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. In
-                        dolores cumque temporibus beatae magnam provident, eveniet quasi ipsum minima quaerat ab rerum
-                        perspiciatis hic saepe laboriosam culpa veritatis obcaecati nihil.</p>-->
+                    <p>{{course?.instructor?.bio}}</p>
                 </div>
 
 

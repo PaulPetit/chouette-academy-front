@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../_services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CourseService} from "../../_services/course.service";
-import {UserService} from "../../_services/user.service";
+import {CourseService} from '../../_services/course.service';
+import {UserService} from '../../_services/user.service';
 
 @Component({
     selector: 'app-course-details',
@@ -41,9 +41,9 @@ export class CourseDetailsComponent implements OnInit {
                 this.userService.getUserInfosById(value.body.ownerId)
                     .subscribe(value1 => {
                         console.log(value1);
-                        this.course = {...this.course, instructor:{...value1.body}};
+                        this.course = {...this.course, instructor: {...value1.body}};
                         console.log(this.course);
-                    })
+                    });
 
             });
 

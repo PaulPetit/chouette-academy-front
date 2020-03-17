@@ -3,7 +3,7 @@
     <div class="card-body">
         <div class="row align-items-center mx-0 mb-1">
             <img src="{{review?.picture || 'assets/images/user.jpg'}}" class="rounded-circle ml-2 img-review">
-            <h5 class="card-title mb-0 ml-3">{{ review?.name }}</h5>
+            <h5 class="card-title mb-0 ml-3">{{ review?.name || 'Un utilisateur' }}</h5>
         </div>
 
         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur auctor, dui
