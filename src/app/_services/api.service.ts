@@ -166,19 +166,47 @@ export class ApiService {
         return this.tokenService.getToken();
     }
 
-    public makeGetRequest(url: string, paramsGet: object = null, options: { headers?: HttpHeaders; observe?: string, params?: HttpParams } = null): Subject<any> {
+    public makeGetRequest(url: string, paramsGet: object = null, options: {
+        headers?: HttpHeaders;
+        observe?: string;
+        params?: HttpParams;
+        reportProgress?: boolean;
+        responseType?: string;
+        withCredentials?: boolean;
+    } = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.GET, paramsGet, null, options);
     }
 
-    public makePostRequest(url: string, paramsGet: object, body: object, options: object = null): Subject<any> {
+    public makePostRequest(url: string, paramsGet: object, body: object, options: {
+        headers?: HttpHeaders;
+        observe?: string;
+        params?: HttpParams;
+        reportProgress?: boolean;
+        responseType?: string;
+        withCredentials?: boolean;
+    } = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.POST, paramsGet, body, options);
     }
 
-    public makePutRequest(url: string, paramsGet: object, body: object, options: object = null): Subject<any> {
+    public makePutRequest(url: string, paramsGet: object, body: object, options: {
+        headers?: HttpHeaders;
+        observe?: string;
+        params?: HttpParams;
+        reportProgress?: boolean;
+        responseType?: string;
+        withCredentials?: boolean;
+    } = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.PUT, paramsGet, body, options);
     }
 
-    public makeDeleteRequest(url: string, paramsGet: object, options: object = null): Subject<any> {
+    public makeDeleteRequest(url: string, paramsGet: object, options: {
+        headers?: HttpHeaders;
+        observe?: string;
+        params?: HttpParams;
+        reportProgress?: boolean;
+        responseType?: string;
+        withCredentials?: boolean;
+    } = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.DELETE, paramsGet, null, options);
     }
 }
