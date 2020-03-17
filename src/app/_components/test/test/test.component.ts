@@ -10,7 +10,7 @@ import {ApiHttpMethod} from '../../../_enum/api-http-method.enum';
     styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-    public hide = true;
+    public hide = false;
 
 
     constructor(private apiService: ApiService, private httpClient: HttpClient, private authenticationService: AuthenticationService) {
@@ -81,5 +81,9 @@ export class TestComponent implements OnInit {
     testTimestamp() {
         console.log(new Date());
         console.log(new Date(1583409600*1000));
+    }
+
+    testApiServiceOptions() {
+        this.apiService.makeGetRequest('www.google.com', null, {observe: 'test'});
     }
 }

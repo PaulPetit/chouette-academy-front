@@ -57,12 +57,13 @@ export class ApiService {
             headersToSet = headersToSet.set('Authorization', 'Bearer ' + token);
         }
 
-        const httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams } = {
+        let httpOptions: { headers: HttpHeaders; observe: string, params?: HttpParams } = {
             headers: headersToSet,
             observe: 'response',
             params: requestData.paramsGet
         };
 
+        httpOptions = {...httpOptions, ...requestData.options};
 
         switch (requestData.method) {
             case ApiHttpMethod.GET:
@@ -165,7 +166,7 @@ export class ApiService {
         return this.tokenService.getToken();
     }
 
-    public makeGetRequest(url: string, paramsGet: object = null, options: object = null): Subject<any> {
+    public makeGetRequest(url: string, paramsGet: object = null, options: { headers?: HttpHeaders; observe?: string, params?: HttpParams } = null): Subject<any> {
         return this.invoke(url, ApiHttpMethod.GET, paramsGet, null, options);
     }
 
