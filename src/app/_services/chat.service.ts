@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
-import {ApiEnpoints} from '../_class/apiEnpoints';
+import {ApiEndpoints} from '../_class/apiEndpoints';
 import {HttpParams} from '@angular/common/http';
 import {ApiChatMessage} from '../_class/apiChatMessage.class';
 import {Observable} from 'rxjs';
@@ -15,7 +15,7 @@ export class ChatService {
 
     sendMessage(message: ApiChatMessage) {
         // this.apiService.invoke()
-        return this.apiService.makePostRequest(ApiEnpoints.CHAT_POST, null, message);
+        return this.apiService.makePostRequest(ApiEndpoints.CHAT_POST, null, message);
     }
 
 
@@ -25,13 +25,13 @@ export class ChatService {
             .set('startDate', startTime.toString())
             .set('endDate', endTime.toString());
 
-        let url: string = ApiEnpoints.CHAT_GET;
+        let url: string = ApiEndpoints.CHAT_GET;
         url = url.replace('{chatID}', chatId.toString());
 
         return this.apiService.makeGetRequest(url, params);
     }
 
     getServerTime(): Observable<any> {
-        return this.apiService.makeGetRequest(ApiEnpoints.CHAT_GET_SERVER_TIME, null, null);
+        return this.apiService.makeGetRequest(ApiEndpoints.CHAT_GET_SERVER_TIME, null, null);
     }
 }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
-import {ApiEnpoints} from '../_class/apiEnpoints';
+import {ApiEndpoints} from '../_class/apiEndpoints';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ export class CategoriesService {
     }
 
     public getAllCategories() {
-        return this.apiService.makeGetRequest(ApiEnpoints.GET_CATEGORIES);
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_CATEGORIES);
     }
 
 

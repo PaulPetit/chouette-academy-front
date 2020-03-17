@@ -25,9 +25,10 @@ import {ChatMessageComponent} from './_components/chat-message/chat-message.comp
 import { UserReviewComponent } from './_components/user-review/user-review.component';
 import { CategoriesPageComponent } from './_components/categories-page/categories-page.component';
 import { PrivateUserPageComponent } from './_components/private-user-page/private-user-page.component';
-import { CourseEditPageComponent } from './_compnents/course-edit-page/course-edit-page.component';
+import { CourseEditPageComponent } from './_components/course-edit-page/course-edit-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateCAPipe } from './date-ca.pipe';
+import { SearchPageComponent } from './_components/search-page/search-page.component';
 
 
 
@@ -53,7 +54,8 @@ import { DateCAPipe } from './date-ca.pipe';
         CategoriesPageComponent,
         PrivateUserPageComponent,
         CourseEditPageComponent,
-        DateCAPipe
+        DateCAPipe,
+        SearchPageComponent
     ],
     imports: [
         BrowserModule,

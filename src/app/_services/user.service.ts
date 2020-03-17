@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from "./api.service";
-import {ApiEnpoints} from "../_class/apiEnpoints";
+import {ApiEndpoints} from "../_class/apiEndpoints";
 
 @Injectable({
     providedIn: 'root'
@@ -11,14 +11,14 @@ export class UserService {
     }
 
     getCurrentUserInfos() {
-        return this.apiService.makeGetRequest(ApiEnpoints.GET_CURRENT_USER_INFOS);
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_CURRENT_USER_INFOS);
     }
 
     updateCurrentUserInfos(userInfos: any) {
-        return this.apiService.makePutRequest(ApiEnpoints.UPDATE_CURRENT_USER_INFOS, null, userInfos);
+        return this.apiService.makePutRequest(ApiEndpoints.UPDATE_CURRENT_USER_INFOS, null, userInfos);
     }
 
     getUserInfosById(id: number) {
-        return this.apiService.makeGetRequest(ApiEnpoints.GET_USER_PUBLIC_INFOS_BY_ID + '/' + id);
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_USER_PUBLIC_INFOS_BY_ID + '/' + id);
     }
 }

@@ -31,11 +31,11 @@
                 </li>
 
             </ul>
-            <form class="form-inline ml-5 my-2 my-lg-0">
+            <form class="form-inline ml-5 my-2 my-lg-0" [formGroup]="searchForm" (ngSubmit)="doSearch()">
                 <div class="input-group">
-                    <input type="search" class="form-control" placeholder="Recherche">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    <input type="search" class="form-control" placeholder="Recherche" formControlName="searchBar" [value]="query">
+                    <div class="input-group-append" >
+                        <button [disabled]="searchForm.invalid" class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </form>
