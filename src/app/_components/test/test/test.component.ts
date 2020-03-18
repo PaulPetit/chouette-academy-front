@@ -10,7 +10,7 @@ import {ApiHttpMethod} from '../../../_enum/api-http-method.enum';
     styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
-    public hide = false;
+    public hide = true;
 
 
     constructor(private apiService: ApiService, private httpClient: HttpClient, private authenticationService: AuthenticationService) {

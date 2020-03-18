@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {CourseService} from "../../_services/course.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoriesService} from "../../_services/categories.service";
+import {ActivatedRoute} from '@angular/router';
+import {CourseService} from '../../_services/course.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CategoriesService} from '../../_services/categories.service';
 
 @Component({
     selector: 'app-course-edit-page',
@@ -103,13 +103,13 @@ export class CourseEditPageComponent implements OnInit {
 
                         // remplir les dates
                         const timestampPlanned = course.timestampStreamPlanned;
-                        //const timeZoneOffset = new Date().getTimezoneOffset();
+                        // const timeZoneOffset = new Date().getTimezoneOffset();
                         const date = new Date(timestampPlanned * 1000);
 
 
                         const h = date.getHours();
                         const m = date.getMinutes();
-                        const jour = date.getFullYear() + '-' + (date.getMonth()+1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+                        const jour = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
 
                         /*const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
                         const m = date.getUTCMinutes() - timeZoneOffset % 60;
@@ -127,7 +127,7 @@ export class CourseEditPageComponent implements OnInit {
                         console.log(this.courseForm.get('title'));
                         //this.changeDetectorRef.detectChanges()
                     });
-            })
+            });
 
 
     }

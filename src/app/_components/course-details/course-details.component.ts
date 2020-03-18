@@ -17,7 +17,7 @@ export class CourseDetailsComponent implements OnInit {
         private router: Router,
         private courseService: CourseService,
         private route: ActivatedRoute,
-        private authenticationService: AuthenticationService,
+        public authenticationService: AuthenticationService,
         private userService: UserService
     ) {
     }
@@ -47,5 +47,26 @@ export class CourseDetailsComponent implements OnInit {
 
             });
 
+    }
+
+    subscribe() {
+        this.courseService.subscribeToCourse(this.courseId)
+            .subscribe(value => {
+                console.log(value);
+                const message = value.body.message;
+                switch (message) {
+                    case 'SUBSCRIBED':
+                        this.loadCourse();
+                        break;
+                }
+            });
+    }
+
+    unsubscribe() {
+        this.courseService.unsubscribeToCourse(this.courseId)
+            .subscribe(value => {
+                console.log(value);
+                this.loadCourse();
+            });
     }
 }

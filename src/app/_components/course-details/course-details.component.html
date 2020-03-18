@@ -81,7 +81,7 @@
 </div>
 -->
 
-<div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <div class="row bandeau">
         <div class="container my-5">
             <h1>{{course?.title}}</h1>
@@ -155,6 +155,11 @@
                 <div class="col-8">
                     <h3>{{course?.instructor?.fullName}}</h3>
                     <p>{{course?.instructor?.bio}}</p>
+                    <div>
+                        <a *ngIf="course?.instructor?.websiteUrl" href="{{course.instructor.websiteUrl}}" target="_blank" class="social" title="Website"><i class="fas fa-globe"></i></a>
+                        <a *ngIf="course?.instructor?.linkedInUrl" href="{{course.instructor.linkedInUrl}}" href="#" target="_blank" class="social" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a *ngIf="course?.instructor?.twitterUrl" href="{{course.instructor.twitterUrl}}" href="#" target="_blank" class="social" title="Twitter"><i class="fab fa-twitter-square"></i></a>
+                    </div>
                 </div>
 
 
@@ -173,12 +178,24 @@
                 <h1>Gratuit</h1>
 
                 <p class="lead">
-                    <button *ngIf="authenticationService.isAuthenticated()" class="btn btn-primary btn-lg">S'inscrire
-                    </button>
-                    <button (click)="connect()" *ngIf="!authenticationService.isAuthenticated()"
-                            class="btn btn-primary btn-lg">
-                        Connectez-vous pour vous inscrire
-                    </button>
+                    <ng-container *ngIf="authenticationService.isAuthenticated()">
+                        <button
+                            *ngIf="!course?.subscribed" class="btn btn-primary btn-lg" (click)="subscribe()">S'inscrire
+                        </button>
+                        <button
+                            *ngIf="course?.subscribed" class="btn btn-danger btn-lg" (click)="unsubscribe()">Se désinscrire
+                        </button>
+                        <button
+                            *ngIf="course?.subscribed && course?.live" class="btn btn-primary btn-lg" disabled><i class="fas fa-video"></i>Voir le live
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="!authenticationService.isAuthenticated()">
+                        <button (click)="connect()"
+                                class="btn btn-primary btn-lg">
+                            Connectez-vous pour vous inscrire
+                        </button>
+                    </ng-container>
+
                 </p>
             </div>
         </div>

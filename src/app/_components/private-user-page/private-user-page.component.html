@@ -44,6 +44,26 @@
                         <input type="text" class="form-control" id="userLastName" formControlName="lastName">
                     </div>
 
+                    <div class="form-group">
+                        <label for="userBio">Bio</label>
+                        <textarea class="form-control" id="userBio" rows="3" formControlName="bio"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userWebSite">Lien Site Web</label>
+                        <input type="text" class="form-control" id="userWebSite" formControlName="websiteUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userLinkedIn">Lien LinkedIn</label>
+                        <input type="text" class="form-control" id="userLinkedIn" formControlName="linkedInUrl">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userTwitter">Lien Twitter</label>
+                        <input type="text" class="form-control" id="userTwitter" formControlName="twitterUrl">
+                    </div>
+
                     <button [disabled]="userInfosForm.invalid" class="btn btn-primary" type="submit">Valider</button>
                 </form>
 
@@ -83,6 +103,10 @@
             </ng-container>
             <ng-container *ngIf="selectedMenu == checkType.Stream">
                 <h1>Mes informations de stream</h1>
+                <p>Url de stream</p>
+                <input type="text" class="form-control" [value]="streamInfo?.serverUrl" readonly>
+                <p>Clé de stream</p>
+                <input type="text" class="form-control" [value]="streamInfo?.streamKey" readonly>
             </ng-container>
         </div>
 

@@ -49,4 +49,12 @@ export class CourseService {
     search(query: string) {
         return this.apiService.makeGetRequest(ApiEndpoints.SEARCH, {q: query});
     }
+
+    subscribeToCourse(courseId: number) {
+        return this.apiService.makePostRequest(ApiEndpoints.SUBSCRIBE_TO_COURSE.replace('{id}', courseId.toString()), null, null);
+    }
+
+    unsubscribeToCourse(courseId: number) {
+        return this.apiService.makePostRequest(ApiEndpoints.UNSUBSCRIBE_TO_COURSE.replace('{id}', courseId.toString()), null, null);
+    }
 }

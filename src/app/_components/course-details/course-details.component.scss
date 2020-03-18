@@ -12,3 +12,14 @@ video {
     border-radius: .3rem;
     padding: 1.5rem;
 }
+
+.social{
+    padding-right: 10px;
+    color: #212529;
+    font-size: 1.7rem;
+
+    &:hover{
+        color: #5f676e;
+
+    }
+}

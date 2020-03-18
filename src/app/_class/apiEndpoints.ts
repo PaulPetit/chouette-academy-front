@@ -2,7 +2,7 @@ export class ApiEndpoints {
 
     // public static BASE = 'http://localhost:8080/api';
     // public static BASE = 'http://192.168.244.27:8080/api';
-    public static BASE = 'http://rgz.ddns.net:8080/api';
+    public static BASE = 'http://rgz.ddns.net:8888/api';
 
     public static LOGIN = ApiEndpoints.BASE + '/login';
     public static LOGOUT = ApiEndpoints.BASE + '/logout';
@@ -34,6 +34,9 @@ export class ApiEndpoints {
     public static GET_CURRENT_USER_INFOS = ApiEndpoints.BASE + '/user/edit';
     public static UPDATE_CURRENT_USER_INFOS = ApiEndpoints.BASE + '/user/update';
     public static GET_USER_PUBLIC_INFOS_BY_ID = ApiEndpoints.BASE + '/user/public';
+    public static GET_USER_STREAM_URL = ApiEndpoints.BASE + '/user/streamurl';
+    public static SUBSCRIBE_TO_COURSE = ApiEndpoints.BASE + '/course/{id}/subscribe';
+    public static UNSUBSCRIBE_TO_COURSE = ApiEndpoints.BASE + '/course/{id}/unsubscribe';
 
     /* Search */
     public static SEARCH = ApiEndpoints.BASE + '/courses/search';

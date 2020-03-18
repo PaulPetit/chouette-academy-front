@@ -21,4 +21,8 @@ export class UserService {
     getUserInfosById(id: number) {
         return this.apiService.makeGetRequest(ApiEndpoints.GET_USER_PUBLIC_INFOS_BY_ID + '/' + id);
     }
+
+    getStreamInfos() {
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_USER_STREAM_URL);
+    }
 }

@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
             .subscribe(
                 value => {
                      console.log(value);
-                    this.upcomingCourses = value.body.courses;
+                     this.upcomingCourses = value.body.courses;
                 }
             );
 

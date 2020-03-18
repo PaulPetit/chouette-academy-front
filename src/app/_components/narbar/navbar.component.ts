@@ -15,7 +15,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class NavbarComponent implements OnInit {
 
     public categories: CategoryModel[] = [];
-    private searchForm: FormGroup;
+    public searchForm: FormGroup;
     @Input('searchQuery') query = '';
 
     constructor(public authService: AuthenticationService,
