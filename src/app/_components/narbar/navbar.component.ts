@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
     public categories: CategoryModel[] = [];
     public searchForm: FormGroup;
+    public accountName: string;
     @Input('searchQuery') query = '';
 
     constructor(public authService: AuthenticationService,
@@ -27,6 +28,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.accountName = this.authService.getUserName();
         this.categoriesService.getAllCategories().subscribe(
             (value: HttpResponse<any>) => {
                 // console.log(value);
@@ -45,10 +47,6 @@ export class NavbarComponent implements OnInit {
 
     }
 
-
-    encodeURI(name: string) {
-        return encodeURI(name);
-    }
 
     private initSearchForm() {
         this.searchForm = this.fb.group({

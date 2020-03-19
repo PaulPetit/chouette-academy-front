@@ -153,6 +153,7 @@ export class CourseEditPageComponent implements OnInit {
         this.courseService.updateCourse(course)
             .subscribe(value => {
                 console.log(value);
+                alert('Sauvegardé');
             });
 
     }

@@ -130,7 +130,11 @@ export class PrivateUserPageComponent implements OnInit {
             linkedInUrl: this.userInfosForm.get('linkedInUrl').value,
             twitterUrl: this.userInfosForm.get('twitterUrl').value
         };
-        this.userService.updateCurrentUserInfos(user).subscribe();
+        this.userService.updateCurrentUserInfos(user).subscribe(
+            value => {
+                alert('Sauvegardé');
+            }
+        );
     }
 
     private loadStreamInfosInfos() {

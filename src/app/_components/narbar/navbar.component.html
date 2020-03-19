@@ -51,7 +51,7 @@
                 </ng-container>
                 <ng-container *ngIf="authService.isAuthenticated()">
                     <a routerLink="/user">
-                        <button class="btn btn-outline-success mr-3" type="submit">Mon compte</button>
+                        <button class="btn btn-outline-success mr-3" type="submit">{{ accountName || 'Mon compte' }}</button>
                     </a>
 
                     <button (click)="logout()" class="btn btn-outline-success mr-3" type="submit">Se déconnecter

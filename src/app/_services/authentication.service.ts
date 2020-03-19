@@ -13,6 +13,13 @@ export class AuthenticationService {
     constructor(private apiService: ApiService) {
     }
 
+    setUserName(username: string) {
+        localStorage.setItem('username', username);
+    }
+
+    getUserName(): string {
+        return localStorage.getItem('username');
+    }
 
     isAuthenticated(): boolean {
         // console.log("isAuthenticated " + localStorage.getItem("logged"));

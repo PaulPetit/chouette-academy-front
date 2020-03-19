@@ -4,6 +4,7 @@ import {AuthenticationService} from 'src/app/_services/authentication.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessagesService} from 'src/app/_services/messages.service';
 import {HttpResponse} from '@angular/common/http';
+import {UserService} from '../../_services/user.service';
 
 @Component({
     selector: 'app-login-page',
@@ -23,7 +24,8 @@ export class LoginPageComponent implements OnInit {
         private autenticationService: AuthenticationService,
         private router: Router,
         private messageService: MessagesService,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private userService: UserService) {
     }
 
     ngOnInit() {
@@ -57,15 +59,25 @@ export class LoginPageComponent implements OnInit {
         this.submitted = true;
 
         this.autenticationService.login(this.login.value, this.password.value).subscribe((value: HttpResponse<any>) => {
-            console.log(value);
+            // console.log(value);
+            const userID = value.body.data.userId;
 
-            localStorage.setItem("userId", value.body.data.userId);
+            localStorage.setItem('userId', userID);
 
-            this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
-            this.route.queryParams.subscribe(params => {
-                const redirect = params.redirectUrl || '/';
-                this.router.navigate([redirect]);
-            });
+            this.userService.getCurrentUserInfos()
+                .subscribe(value1 => {
+
+                    // console.log(value1);
+                    this.autenticationService.setUserName(value1.body.fullName);
+
+
+                    this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
+                    this.route.queryParams.subscribe(params => {
+                        const redirect = params.redirectUrl || '/';
+                        this.router.navigate([redirect]);
+                    });
+                });
+
 
             /*console.log('auth ' + value);
 
