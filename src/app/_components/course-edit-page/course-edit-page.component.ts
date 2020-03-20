@@ -100,9 +100,9 @@ export class CourseEditPageComponent implements OnInit {
                 this.categories = value.body.categories;
                 console.log(value);
                 this.courseService.getCourse(this.courseId)
-                    .subscribe(value => {
+                    .subscribe(value1 => {
 
-                        const course = value.body;
+                        const course = value1.body;
                         console.log(course);
                         const status = course.status;
                         this.coursePicture = course.pictureUrl;
@@ -110,7 +110,27 @@ export class CourseEditPageComponent implements OnInit {
                         // remplir les dates
                         const timestampPlanned = course.timestampStreamPlanned;
                         // const timeZoneOffset = new Date().getTimezoneOffset();
-                        const date = new Date(timestampPlanned * 1000);
+                        let date;
+                        if (timestampPlanned === null) {
+                            // Si on viens de créer le cours on met une date par défaut
+                            date = new Date();
+                            date.setSeconds(0);
+                            // on set les minutes par tranche de quart d'heure
+                            if (date.getMinutes() < 15) {
+                                date.setMinutes(15);
+                            } else if (date.getMinutes() >= 15 && date.getMinutes() < 30) {
+                                date.setMinutes(30);
+                            } else if (date.getMinutes() >= 30 && date.getMinutes() < 45) {
+                                date.setMinutes(45);
+                            } else if (date.getMinutes() >= 45) {
+                                date.setHours(date.getHours() + 1);
+                                date.setMinutes(0);
+                            }
+
+                        } else {
+                            // Si non on met la vraie date
+                            date = new Date(timestampPlanned * 1000);
+                        }
 
 
                         const h = date.getHours();
