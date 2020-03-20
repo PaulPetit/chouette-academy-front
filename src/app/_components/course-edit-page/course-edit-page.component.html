@@ -87,9 +87,14 @@
                 </div>
             </div>
         </div>-->
+        <div class="custom-control custom-checkbox">
+            <input formControlName="visible" type="checkbox" class="custom-control-input" id="plannedCheckbox">
+            <label class="custom-control-label" for="plannedCheckbox">Visible</label>
+        </div>
 
-
-        <button [disabled]="courseForm.invalid" class="btn btn-primary" type="submit">Valider</button>
+        <div class="form-group mt-3">
+            <button [disabled]="courseForm.invalid" class="btn btn-primary" type="submit">Valider</button>
+        </div>
     </form>
 </div>
 

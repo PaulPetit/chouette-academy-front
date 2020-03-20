@@ -56,7 +56,8 @@ export class CourseEditPageComponent implements OnInit {
             ]],
             minute: ['', [
                 Validators.required
-            ]]
+            ]],
+            visible: [false]
         });
 
         this.loadData();
@@ -86,9 +87,13 @@ export class CourseEditPageComponent implements OnInit {
         return this.courseForm.get('minute');
     }
 
+    get visible() {
+        return this.courseForm.get('visible');
+    }
+
     private loadData() {
 
-        //this.initDAteDebug();
+        // this.initDAteDebug();
 
         this.categoriesService.getAllCategories()
             .subscribe(value => {
@@ -96,9 +101,10 @@ export class CourseEditPageComponent implements OnInit {
                 console.log(value);
                 this.courseService.getCourse(this.courseId)
                     .subscribe(value => {
-                        console.log(value);
-                        const course = value.body;
 
+                        const course = value.body;
+                        console.log(course);
+                        const status = course.status;
                         this.coursePicture = course.pictureUrl;
 
                         // remplir les dates
@@ -109,7 +115,8 @@ export class CourseEditPageComponent implements OnInit {
 
                         const h = date.getHours();
                         const m = date.getMinutes();
-                        const jour = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0');
+                        const jour = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0')
+                            + '-' + date.getDate().toString().padStart(2, '0');
 
                         /*const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
                         const m = date.getUTCMinutes() - timeZoneOffset % 60;
@@ -123,9 +130,21 @@ export class CourseEditPageComponent implements OnInit {
                         this.title.setValue(course.title);
                         this.description.setValue(course.description);
                         this.category.setValue(course.categoryId);
-                        //this.courseForm.controls.title.setValue('abc');
-                        console.log(this.courseForm.get('title'));
-                        //this.changeDetectorRef.detectChanges()
+
+                        // Set la checkBox
+
+                        switch (status) {
+                            case 'DRAFT':
+                                this.visible.setValue(false);
+                                break;
+                            case 'PLANNED':
+                                this.visible.setValue(true);
+                                break;
+                        }
+
+                        // this.courseForm.controls.title.setValue('abc');
+                        // console.log(this.courseForm.get('title'));
+                        // this.changeDetectorRef.detectChanges()
                     });
             });
 
@@ -142,38 +161,41 @@ export class CourseEditPageComponent implements OnInit {
             date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
         timestamp = Math.floor(timestamp / 1000);
 
+        let status;
+
+        if (this.visible.value) {
+            status = 'PLANNED';
+        } else {
+            status = 'DRAFT';
+        }
+
         const course = {
             id: this.courseId,
             title: this.title.value,
             description: this.description.value,
             timestampStreamPlanned: timestamp,
-            categoryId: this.category.value
+            categoryId: this.category.value,
+            status: status
         };
 
         this.courseService.updateCourse(course)
             .subscribe(value => {
                 console.log(value);
                 alert('Sauvegardé');
+                this.loadData();
             });
 
     }
 
-    private initDAteDebug() {
-        const timestampPlanned = 1585645200;
-        const timeZoneOffset = new Date().getTimezoneOffset();
-        const date = new Date(timestampPlanned * 1000);
-
-        const h = date.getUTCHours() - Math.floor(timeZoneOffset / 60);
-        const m = date.getUTCMinutes() - timeZoneOffset % 60;
-        const jour = date.toISOString().substring(0, 10);
-    }
 
     onSubmitImage() {
         console.log(this.imageForm);
         this.courseService.sendImage(this.imageForm.get('file').value, this.courseId)
             .subscribe(value => {
                 console.log('envoi image');
+                alert('Image envoyée');
                 console.log(value);
+                this.loadData();
             });
     }
 

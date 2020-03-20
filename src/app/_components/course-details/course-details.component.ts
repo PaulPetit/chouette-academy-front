@@ -35,17 +35,20 @@ export class CourseDetailsComponent implements OnInit {
 
         this.courseService.getCourse(this.courseId)
             .subscribe(value => {
-                console.log(value);
-                this.course = {...value.body};
+                    console.log(value);
+                    this.course = {...value.body};
 
-                this.userService.getUserInfosById(value.body.ownerId)
-                    .subscribe(value1 => {
-                        console.log(value1);
-                        this.course = {...this.course, instructor: {...value1.body}};
-                        console.log(this.course);
-                    });
+                    this.userService.getUserInfosById(value.body.ownerId)
+                        .subscribe(value1 => {
+                            console.log(value1);
+                            this.course = {...this.course, instructor: {...value1.body}};
+                            console.log(this.course);
+                        });
 
-            });
+                },
+                error => {
+                    this.router.navigate(['notfound']);
+                });
 
     }
 
@@ -68,5 +71,9 @@ export class CourseDetailsComponent implements OnInit {
                 console.log(value);
                 this.loadCourse();
             });
+    }
+
+    showLive() {
+        this.router.navigate(['live', this.courseId]);
     }
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {ChatService} from '../../_services/chat.service';
 import {ApiChatMessage} from '../../_class/apiChatMessage.class';
 
@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     private startTime = this.getTimestamp();
     private endTime = this.getTimestamp();
 
-    private chatId = 1;
+    @Input() private chatId;
     private interval: any;
 
     private deltaTime: number;

@@ -186,7 +186,7 @@
                             *ngIf="course?.subscribed" class="btn btn-danger btn-lg" (click)="unsubscribe()">Se désinscrire
                         </button>
                         <button
-                            *ngIf="course?.subscribed && course?.live" class="btn btn-primary btn-lg" disabled><i class="fas fa-video"></i>Voir le live
+                            *ngIf="course?.subscribed && course?.live" class="btn btn-primary btn-lg" (click)="showLive()"><i class="fas fa-video"></i>Voir le live
                         </button>
                     </ng-container>
                     <ng-container *ngIf="!authenticationService.isAuthenticated()">

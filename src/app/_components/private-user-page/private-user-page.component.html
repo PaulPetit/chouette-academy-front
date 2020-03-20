@@ -10,16 +10,24 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <a (click)="changeView(checkType.PersonalInfos)"><i *ngIf="selectedMenu == checkType.PersonalInfos" class="fas fa-arrow-circle-right"></i>Mes informations personnelles</a>
+                        <a (click)="changeView(checkType.PersonalInfos)"><i
+                            *ngIf="selectedMenu == checkType.PersonalInfos" class="fas fa-arrow-circle-right"></i>Mes
+                            informations personnelles</a>
                     </li>
                     <li class="list-group-item">
-                        <a (click)="changeView(checkType.Subscriptions)"><i *ngIf="selectedMenu == checkType.Subscriptions" class="fas fa-arrow-circle-right"></i>Mes souscriptions</a>
+                        <a (click)="changeView(checkType.Subscriptions)"><i
+                            *ngIf="selectedMenu == checkType.Subscriptions" class="fas fa-arrow-circle-right"></i>Mes
+                            souscriptions</a>
                     </li>
                     <li class="list-group-item">
-                        <a (click)="changeView(checkType.Courses)"><i *ngIf="selectedMenu == checkType.Courses" class="fas fa-arrow-circle-right"></i>Mes Cours</a>
+                        <a (click)="changeView(checkType.Courses)"><i *ngIf="selectedMenu == checkType.Courses"
+                                                                      class="fas fa-arrow-circle-right"></i>Mes
+                            Cours</a>
                     </li>
                     <li class="list-group-item">
-                        <a (click)="changeView(checkType.Stream)"><i *ngIf="selectedMenu == checkType.Stream" class="fas fa-arrow-circle-right"></i>Mes informations de stream</a>
+                        <a (click)="changeView(checkType.Stream)"><i *ngIf="selectedMenu == checkType.Stream"
+                                                                     class="fas fa-arrow-circle-right"></i>Mes
+                            informations de stream</a>
                     </li>
                 </ul>
             </div>
@@ -28,6 +36,18 @@
         <div class="col-9">
             <ng-container *ngIf="selectedMenu == checkType.PersonalInfos">
                 <h1>Mes informations personnelles</h1>
+
+                <ng-container *ngIf="userPicture">
+                    <img style="width: 150px" src="{{ userPicture }}" alt="Image de couverture">
+                </ng-container>
+
+                <form class="mt-3" [formGroup]="userImageForm" (ngSubmit)="onSubmitImage()">
+                    <div class="form-group">
+                        <label for="userImg">Image de profil</label>
+                        <input (change)="uploadFile($event)" class="form-control" id="userImg" type="file" formControlName="file">
+                    </div>
+                    <button [disabled]="userImageForm.invalid" class="btn btn-primary" type="submit">Envoyer l'image</button>
+                </form>
 
                 <form class="mt-3" [formGroup]="userInfosForm" (ngSubmit)="onSubmitUserForm()">
 
@@ -67,11 +87,37 @@
                     <button [disabled]="userInfosForm.invalid" class="btn btn-primary" type="submit">Valider</button>
                 </form>
 
+                <form class="mt-3" [formGroup]="passwordForm" (ngSubmit)="onSubmitPasswordForm()">
+
+                    <div class="form-group">
+                        <label for="oldPassword">Ancien mot de passe</label>
+                        <input type="password" class="form-control" id="oldPassword" formControlName="oldPassword">
+                    </div>
+
+                    <div formGroupName="newPassword" (change)="onChange()">
+                        <div class="form-group">
+                            <label for="newPassword1">Nouveau mot de passe</label>
+                            <input type="password" class="form-control" id="newPassword1" formControlName="newPassword1">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword2">Confirmez le nouveau mot de passse</label>
+                            <input type="password" class="form-control" id="newPassword2" formControlName="newPassword2">
+                        </div>
+                    </div>
+
+                    <button [disabled]="passwordForm.invalid" class="btn btn-primary" type="submit">Valider</button>
+                </form>
 
 
             </ng-container>
             <ng-container *ngIf="selectedMenu == checkType.Subscriptions">
                 <h1>Mes souscriptions</h1>
+                <div class="row" *ngIf="subscriptions">
+                    <div *ngFor="let course of subscriptions" class="col-4 px-2">
+                        <app-course-card [course]="course"></app-course-card>
+                    </div>
+                </div>
+
             </ng-container>
             <ng-container *ngIf="selectedMenu == checkType.Courses">
                 <h1>Mes Cours</h1>
@@ -93,7 +139,18 @@
                         <td>{{ course.status }}</td>
                         <td>{{ course.timestampStreamPlanned | dateCA}}</td>
                         <td>
-                            <button class="btn btn-outline-info" (click)="showEdit(course.id)">Edit</button>
+                            <button *ngIf="course.status == 'DRAFT' || course.status == 'PLANNED'"
+                                    class="btn btn-outline-info" (click)="showEdit(course.id)">Edit
+                            </button>
+                            <button *ngIf="course.status == 'PLANNED'" class="btn btn-danger"
+                                    (click)="goLive(course.id)">Live
+                            </button>
+                            <button *ngIf="course.status == 'LIVE'" class="btn btn-danger"
+                                    (click)="stopLive(course.id)">Stop Live
+                            </button>
+                            <button *ngIf="course.status == 'LIVE'" class="btn btn-outline-info"
+                                    (click)="showLive(course.id)">Voir le live
+                            </button>
                         </td>
                     </tr>
                     </tbody>

@@ -21,6 +21,7 @@ export class ApiEndpoints {
     /* Courses */
     public static CREATE_COURSES = ApiEndpoints.BASE + '/course/create';
     public static GET_MY_COURSES = ApiEndpoints.BASE + '/courses/owned';
+    public static GET_SUBSCRIBED_COURSES = ApiEndpoints.BASE + '/courses/subscribed';
     public static GET_COURSE = ApiEndpoints.BASE + '/course';
     public static UPDATE_COURSE = ApiEndpoints.BASE + '/course/update';
     public static SEND_COURSE_PICTURE = ApiEndpoints.BASE + '/course/picture';
@@ -28,6 +29,9 @@ export class ApiEndpoints {
     public static GET_UPCOMING_COURSES = ApiEndpoints.BASE + '/courses/upcoming';
 
     public static GET_COURSES_BY_CATEGORY = ApiEndpoints.BASE + '/courses/category';
+
+    public static GO_LIVE = ApiEndpoints.BASE + '/course/golive';
+    public static END_LIVE = ApiEndpoints.BASE + '/course/endlive';
 
 
     /* User */
@@ -37,6 +41,8 @@ export class ApiEndpoints {
     public static GET_USER_STREAM_URL = ApiEndpoints.BASE + '/user/streamurl';
     public static SUBSCRIBE_TO_COURSE = ApiEndpoints.BASE + '/course/{id}/subscribe';
     public static UNSUBSCRIBE_TO_COURSE = ApiEndpoints.BASE + '/course/{id}/unsubscribe';
+    public static SEND_USER_PICTURE = ApiEndpoints.BASE + '/user/picture';
+    public static CHANGE_PASSWORD = ApiEndpoints.BASE + '/user/updatepassword';
 
     /* Search */
     public static SEARCH = ApiEndpoints.BASE + '/courses/search';

@@ -57,4 +57,16 @@ export class CourseService {
     unsubscribeToCourse(courseId: number) {
         return this.apiService.makePostRequest(ApiEndpoints.UNSUBSCRIBE_TO_COURSE.replace('{id}', courseId.toString()), null, null);
     }
+
+    goLive(courseId: number) {
+        return this.apiService.makePutRequest(ApiEndpoints.GO_LIVE + '/' + courseId, null, null);
+    }
+
+    endLive(courseId: number) {
+        return this.apiService.makePutRequest(ApiEndpoints.END_LIVE + '/' + courseId, null, null);
+    }
+
+    getSubscribedCourses() {
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_SUBSCRIBED_COURSES);
+    }
 }
