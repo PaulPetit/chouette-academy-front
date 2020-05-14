@@ -53,7 +53,7 @@ const routes: Routes = [
         ]
     },
 
-    {path: 'live/:course-id', component: LivePageComponent, canActivate: [LoggedInGuard]},
+    {path: 'live/:course-id', component: LivePageComponent/*, canActivate: [LoggedInGuard]*/},
     {path: 'login', component: LoginPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'register', component: SignUpPageComponent, canActivate: [AlreadyLoggedInGuard]},
     {path: 'user', component: PrivateUserPageComponent, canActivate: [LoggedInGuard]},

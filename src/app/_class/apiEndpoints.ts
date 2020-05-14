@@ -2,7 +2,7 @@ export class ApiEndpoints {
 
     // public static BASE = 'http://localhost:8080/api';
     // public static BASE = 'http://192.168.244.27:8080/api';
-    public static BASE = 'http://rgz.ddns.net:8888/api';
+    public static BASE = 'http://api.chouette-academy.rogez.net:8888/api';
 
     public static LOGIN = ApiEndpoints.BASE + '/login';
     public static LOGOUT = ApiEndpoints.BASE + '/logout';
@@ -27,6 +27,7 @@ export class ApiEndpoints {
     public static SEND_COURSE_PICTURE = ApiEndpoints.BASE + '/course/picture';
     public static GET_COURSES = ApiEndpoints.BASE + '/courses';
     public static GET_UPCOMING_COURSES = ApiEndpoints.BASE + '/courses/upcoming';
+    public static GET_LIVE = ApiEndpoints.BASE + '/courses/live';
 
     public static GET_COURSES_BY_CATEGORY = ApiEndpoints.BASE + '/courses/category';
 

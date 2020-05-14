@@ -11,6 +11,7 @@ export class HomePageComponent implements OnInit {
 
 
     upcomingCourses: Array<any>;
+    liveCourses: any;
 
     constructor(private messageService: MessagesService, private courseService: CourseService) {
     }
@@ -18,6 +19,7 @@ export class HomePageComponent implements OnInit {
     ngOnInit() {
 
         this.loadUpcomingCourses();
+        this.loadLives();
 
 
 
@@ -39,5 +41,15 @@ export class HomePageComponent implements OnInit {
                 courses = courses.filter(value1 => value1.status == "PLANNED");
                 console.log(courses);
             });*/
+    }
+
+    private loadLives() {
+        this.courseService.getLiveCourses()
+            .subscribe(
+                value => {
+                    console.log(value);
+                    this.liveCourses = value.body.courses;
+                }
+            );
     }
 }

@@ -1,11 +1,19 @@
 <div class="card h-100">
-    <img class="card-img-top" src="{{course?.pictureUrl || 'http://placekitten.com/200/112'}}" alt="Card image cap">
+    <img class="card-img-top" src="{{course.pictureUrl || 'http://placekitten.com/200/112'}}" alt="Card image cap">
     <div class="card-body">
-        <h5 class="card-title">{{course?.title}}</h5>
-        <p><small>{{course?.instructorName}}</small></p>
-        <p><small>{{course?.timestampStreamPlanned | dateCA}}</small></p>
 
-        <a [routerLink]="['/course', course?.id]"
+        <p *ngIf="course.live"><i class="fas fa-video" style="color: red;"></i> En live</p>
+
+
+        <h5 class="card-title">{{course.title}}</h5>
+        <p><small>{{course.instructorName}}</small></p>
+        <p><small>{{course.timestampStreamPlanned | dateCA}}</small></p>
+
+        <a *ngIf="!course.live" [routerLink]="['/course', course.id]"
+           style="display: block; height: 0; text-decoration: none; color: transparent;"
+           class="stretched-link"></a>
+
+        <a *ngIf="course.live" [routerLink]="['/live', course.id]"
            style="display: block; height: 0; text-decoration: none; color: transparent;"
            class="stretched-link"></a>
     </div>

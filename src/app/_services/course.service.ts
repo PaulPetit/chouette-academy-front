@@ -69,4 +69,8 @@ export class CourseService {
     getSubscribedCourses() {
         return this.apiService.makeGetRequest(ApiEndpoints.GET_SUBSCRIBED_COURSES);
     }
+
+    getLiveCourses() {
+        return this.apiService.makeGetRequest(ApiEndpoints.GET_LIVE);
+    }
 }

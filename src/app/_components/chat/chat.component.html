@@ -10,18 +10,18 @@
 
     </div>
 
-    <div>
+    <form (ngSubmit)="sendMessage(textAreaChat.value); textAreaChat.value=''">
 
         <div class="form-group">
-            <textarea #textAreaChat style="resize: none" class="form-control" id="exampleFormControlTextarea1" rows="1"
-                      placeholder="Envoyer un message"></textarea>
+            <input type="text" #textAreaChat style="resize: none" class="form-control" id="exampleFormControlTextarea1"
+                   placeholder="Envoyer un message"/>
         </div>
         <div class="d-flex">
-            <button  (click)="sendMessage(textAreaChat.value)" type="button"
+            <button type="submit"
                     class="btn btn-primary btn-sm ml-auto">
                 Chat
             </button>
         </div>
-    </div>
+    </form>
 
 </div>

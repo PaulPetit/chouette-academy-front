@@ -21,14 +21,20 @@
 
 
 <div class="container container-larger mt-5 mb-5">
+
+    <h3 class="mb-3">Les cours en live</h3>
+    <div class="row">
+        <div *ngFor="let course of liveCourses" class="col-4 px-2">
+            <app-course-card [course]="course"></app-course-card>
+        </div>
+    </div>
+
     <h3 class="mb-3">Les formations à venir</h3>
     <div class="row">
         <div *ngFor="let course of upcomingCourses" class="col-4 px-2">
             <app-course-card [course]="course"></app-course-card>
         </div>
     </div>
-
-
 </div>
 
 <div class="container container-larger mt-5 mb-5">

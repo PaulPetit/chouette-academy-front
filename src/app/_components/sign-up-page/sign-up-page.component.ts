@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../_services/authentication.service';
 import {UserRegisterModel} from '../../_models/userRegisterModel';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MessagesService} from '../../_services/messages.service';
 import {ApiMessages} from '../../_models/ApiMessages.enum';
+import {HttpResponse} from '@angular/common/http';
+import {UserService} from '../../_services/user.service';
 
 @Component({
     selector: 'app-sign-up-page',
@@ -22,7 +24,11 @@ export class SignUpPageComponent implements OnInit {
     constructor(private fb: FormBuilder,
                 private authenticationService: AuthenticationService,
                 private router: Router,
-                private messagesService: MessagesService
+                private messagesService: MessagesService,
+                private autenticationService: AuthenticationService,
+                private userService: UserService,
+                private messageService: MessagesService,
+                private route: ActivatedRoute
     ) {
     }
 
@@ -96,8 +102,37 @@ export class SignUpPageComponent implements OnInit {
                     const apiMessages: ApiMessages = ApiMessages[response.body.message];
 
                     if (apiMessages === ApiMessages.REGISTERED_OK) {
-                        this.messagesService.addSuccessMessage('Register', 'Vous pouvez désormais vous connecter');
-                        this.router.navigate(['login']);
+                        /*this.messagesService.addSuccessMessage('Register', 'Vous pouvez désormais vous connecter');
+                        this.router.navigate(['login']);*/
+
+                        this.autenticationService.login(this.login.value, this.password.value)
+                            .subscribe((value: HttpResponse<any>) => {
+                                    // console.log(value);
+                                    const userID = value.body.data.userId;
+
+                                    localStorage.setItem('userId', userID);
+
+                                    this.userService.getCurrentUserInfos()
+                                        .subscribe(value1 => {
+
+                                            // console.log(value1);
+                                            this.autenticationService.setUserName(value1.body.fullName);
+
+
+                                            this.messageService.addSuccessMessage('Connexion', 'Connexion réussie');
+                                            this.route.queryParams.subscribe(params => {
+                                                const redirect = params.redirectUrl || '/';
+                                                this.router.navigate([redirect]);
+                                            });
+                                        });
+
+
+                                },
+                                (error: any) => {
+
+                                });
+
+
                     } else {
                         // Dans le cas d'une erreur
                         if (apiMessages === ApiMessages.EMAIL_ALREADY_EXISTS) {
